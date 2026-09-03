@@ -74,3 +74,21 @@ forbidden_modules = [
     "pydantic_settings",
     "httpx",
 ]
+
+[[tool.importlinter.contracts]]
+name = "Presentation does not depend on infrastructure or bootstrap"
+type = "forbidden"
+source_modules = ["liuliangchuhai.presentation"]
+forbidden_modules = [
+    "liuliangchuhai.infrastructure",
+    "liuliangchuhai.bootstrap",
+]
+
+[[tool.importlinter.contracts]]
+name = "Infrastructure does not depend on presentation or bootstrap"
+type = "forbidden"
+source_modules = ["liuliangchuhai.infrastructure"]
+forbidden_modules = [
+    "liuliangchuhai.presentation",
+    "liuliangchuhai.bootstrap",
+]

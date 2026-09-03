@@ -17,7 +17,12 @@ WEB_DIR = ROOT / "apps" / "web"
 API_TESTS = API_DIR / "tests"
 OPENAPI_FILE = API_DIR / "openapi.json"
 CLIENT_FILE = WEB_DIR / "src" / "api" / "generated" / "schema.ts"
-RUFF_PATHS = [API_DIR / "src", API_TESTS, ROOT / "scripts" / "dev.py"]
+RUFF_PATHS = [
+    API_DIR / "src",
+    API_TESTS,
+    ROOT / "scripts" / "dev.py",
+    ROOT / "scripts" / "check_core_imports.py",
+]
 GENERATED_WARNING = "// DO NOT EDIT MANUALLY. Generated from apps/api/openapi.json.\n"
 
 
@@ -45,7 +50,17 @@ def backend_paths() -> list[str]:
     return [str(path) for path in RUFF_PATHS]
 
 
+def _copy_if_missing(example: Path, destination: Path) -> None:
+    if destination.exists():
+        return
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(example, destination)
+    print(f"created {destination.relative_to(ROOT)}", flush=True)
+
+
 def bootstrap() -> None:
+    _copy_if_missing(API_DIR / ".env.example", API_DIR / ".env")
+    _copy_if_missing(WEB_DIR / ".env.example", WEB_DIR / ".env.local")
     require_tools("uv", "pnpm")
     run(["uv", "sync", "--project", str(API_DIR), "--all-groups", "--locked"])
     run(["pnpm", "install", "--frozen-lockfile"], cwd=WEB_DIR)
@@ -62,7 +77,8 @@ def dev_api() -> None:
             "0.0.0.0",
             "--port",
             "8000",
-        )
+        ),
+        cwd=API_DIR,
     )
 
 
@@ -82,7 +98,7 @@ def dev() -> None:
                 "--port",
                 "8000",
             ),
-            ROOT,
+            API_DIR,
         ),
         (["pnpm", "dev"], WEB_DIR),
     ]
@@ -146,6 +162,7 @@ def typecheck() -> None:
 
 def architecture_check() -> None:
     run(uv_run("lint-imports", "--config", str(API_DIR / "pyproject.toml")))
+    run(uv_run("python", str(ROOT / "scripts" / "check_core_imports.py")))
 
 
 def test_path(path: Path) -> None:
@@ -178,6 +195,10 @@ def frontend_lint() -> None:
 
 def frontend_typecheck() -> None:
     run(["pnpm", "typecheck"], cwd=WEB_DIR)
+
+
+def frontend_build() -> None:
+    run(["pnpm", "build"], cwd=WEB_DIR)
 
 
 def generate_openapi(destination: Path = OPENAPI_FILE) -> None:
@@ -246,6 +267,7 @@ def check() -> None:
         ("acceptance tests", test_acceptance),
         ("frontend lint", frontend_lint),
         ("frontend typecheck", frontend_typecheck),
+        ("frontend build", frontend_build),
         ("generated contract drift", generated_check),
     ]
     for name, stage in stages:
@@ -281,6 +303,7 @@ TASKS: dict[str, tuple[Callable[[], None], str]] = {
     "dev": (dev, "Run API and web development servers"),
     "dev-api": (dev_api, "Run the FastAPI development server"),
     "dev-web": (dev_web, "Run the Next.js development server"),
+    "build-web": (frontend_build, "Build the Next.js production bundle"),
     "test": (test, "Run all backend tests"),
     "test-unit": (test_unit, "Run backend unit tests"),
     "test-contract": (test_contract, "Run provider and ownership contract tests"),

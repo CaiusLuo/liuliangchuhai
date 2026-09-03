@@ -1,0 +1,7 @@
+# Architecture-critical paths require review from the repository owner.
+/apps/api/src/liuliangchuhai/domain/ @CaiusLuo
+/apps/api/src/liuliangchuhai/application/ @CaiusLuo
+/apps/api/src/liuliangchuhai/bootstrap/ @CaiusLuo
+/apps/api/pyproject.toml @CaiusLuo
+/scripts/ @CaiusLuo
+/.github/workflows/ @CaiusLuo

@@ -21,14 +21,21 @@ def test_market_context_accepts_optional_fields() -> None:
     assert market.market_notes == "Explore small sample packs"
 
 
-@pytest.mark.parametrize("country", ["", " \t\n", None])
-def test_market_context_rejects_missing_or_blank_country(country: object) -> None:
+def test_optional_fields_accept_explicit_none() -> None:
+    market = MarketContext(country="Vietnam", target_audience=None, market_notes=None)
+
+    assert market.target_audience is None
+    assert market.market_notes is None
+
+
+@pytest.mark.parametrize("country", ["", " \t\n", None, 123, True, ("Vietnam",)])
+def test_market_context_rejects_invalid_country(country: object) -> None:
     with pytest.raises(ValueError):
         MarketContext(country=country)
 
 
 @pytest.mark.parametrize("field", ["target_audience", "market_notes"])
-@pytest.mark.parametrize("value", ["", " \t\n"])
-def test_market_context_rejects_blank_optional_fields(field: str, value: str) -> None:
+@pytest.mark.parametrize("value", ["", " \t\n", 123, True, ("Students",)])
+def test_market_context_rejects_invalid_optional_fields(field: str, value: object) -> None:
     with pytest.raises(ValueError):
         MarketContext(country="Vietnam", **{field: value})

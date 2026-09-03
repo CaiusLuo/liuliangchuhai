@@ -2,7 +2,7 @@
 
 **Feature Branch**: `feat/2-product-market-analysis`
 **Created**: 2026-09-04
-**Status**: Frozen V1 design; SPEC + PLAN + RED only
+**Status**: Frozen V1 design; GREEN implemented and locally verified
 **Input**: [Issue #2](https://github.com/CaiusLuo/liuliangchuhai/issues/2), dependent on #1, and the user's frozen V1 contract.
 
 ## User scenario and acceptance
@@ -106,12 +106,12 @@ enrichment, or fallback behavior. The future mock is deterministic and key-free.
 
 ## Out of scope
 
-Production implementation in this RED-only turn; HTTP/OpenAPI, frontend, real
+HTTP/OpenAPI, frontend, real
 providers/SDKs, generic `LLMRequest`/`ChatCompletion` abstractions or
 `messages`/`model`/`temperature`/`max_tokens`/`response_format` controls,
 digital-human or content generation,
 product repositories/catalog changes, persistence, enrichment, ranking, caching,
 retry, orchestration, RAG, crawling, realtime data, vector DB, and ML scoring.
 
-GREEN, architecture-check, and the full quality gate remain future work after
-the constitution boundary is explicitly aligned.
+Constitution 1.2.0 authorizes GREEN for this frozen core. Verification requires
+the focused suite, `make architecture-check`, `make check`, and `git diff --check`.

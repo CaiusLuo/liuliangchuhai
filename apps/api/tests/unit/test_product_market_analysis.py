@@ -88,9 +88,20 @@ def test_blank_summary_is_rejected(analysis: ProductMarketAnalysis, summary: str
         "content_directions",
     ],
 )
-def test_blank_collection_items_are_rejected(analysis: ProductMarketAnalysis, field: str) -> None:
+@pytest.mark.parametrize(
+    "value",
+    [
+        pytest.param(("Valid item", " \t\n"), id="blank-item"),
+        pytest.param(["Valid item"], id="list"),
+        pytest.param("Valid item", id="bare-string"),
+        pytest.param(("Valid item", 123), id="non-string-item"),
+    ],
+)
+def test_invalid_collections_are_rejected(
+    analysis: ProductMarketAnalysis, field: str, value: object
+) -> None:
     with pytest.raises(ValueError):
-        replace(analysis, **{field: ("Valid item", " \t\n")})
+        replace(analysis, **{field: value})
 
 
 @pytest.mark.parametrize("recommendation", ["unknown", "fit", None])

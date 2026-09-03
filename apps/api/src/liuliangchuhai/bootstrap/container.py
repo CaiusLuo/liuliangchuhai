@@ -4,6 +4,7 @@ from importlib.resources import as_file, files
 from liuliangchuhai.application.ports.digital_human import DigitalHumanPort
 from liuliangchuhai.application.ports.llm import LLMPort
 from liuliangchuhai.application.ports.product_repository import ProductRepository
+from liuliangchuhai.application.use_cases.analyze_product import AnalyzeProductUseCase
 from liuliangchuhai.application.use_cases.get_product import GetProduct
 from liuliangchuhai.application.use_cases.get_system_status import GetSystemStatus
 from liuliangchuhai.application.use_cases.list_products import ListProducts
@@ -21,6 +22,7 @@ class Container:
     product_repository: ProductRepository
     list_products: ListProducts
     get_product: GetProduct
+    analyze_product: AnalyzeProductUseCase
 
 
 def _build_llm(provider: str) -> LLMPort:
@@ -48,4 +50,5 @@ def build_container(settings: Settings) -> Container:
         product_repository=product_repository,
         list_products=ListProducts(product_repository),
         get_product=GetProduct(product_repository),
+        analyze_product=AnalyzeProductUseCase(llm),
     )

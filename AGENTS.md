@@ -2,9 +2,8 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/002-product-market-analysis/spec.md` (SPEC + PLAN + RED only).
-Production remains at the completed Issue #1 foundation; do not start Issue #2 GREEN
-until explicitly requested and its constitution phase boundary is aligned.
+Active spec: `specs/002-product-market-analysis/spec.md`. Issue #2 GREEN is authorized
+under constitution 1.2.0; implement only the frozen analysis core and deterministic mock.
 
 ## Architecture
 

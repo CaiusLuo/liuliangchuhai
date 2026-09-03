@@ -41,7 +41,7 @@ def find_violations(package_root: Path = PACKAGE_ROOT) -> list[str]:
                     continue
                 for module in modules:
                     if not _is_allowed(layer, module):
-                        relative_path = path.relative_to(package_root)
+                        relative_path = path.relative_to(package_root).as_posix()
                         violations.append(f"{relative_path}:{node.lineno}: {module}")
     return violations
 

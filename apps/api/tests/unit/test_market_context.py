@@ -1,0 +1,34 @@
+import pytest
+from liuliangchuhai.domain.market_analysis import MarketContext
+
+
+def test_minimal_market_context() -> None:
+    market = MarketContext(country="Vietnam")
+
+    assert market.country == "Vietnam"
+    assert market.target_audience is None
+    assert market.market_notes is None
+
+
+def test_market_context_accepts_optional_fields() -> None:
+    market = MarketContext(
+        country="Thailand",
+        target_audience="Students",
+        market_notes="Explore small sample packs",
+    )
+
+    assert market.target_audience == "Students"
+    assert market.market_notes == "Explore small sample packs"
+
+
+@pytest.mark.parametrize("country", ["", " \t\n", None])
+def test_market_context_rejects_missing_or_blank_country(country: object) -> None:
+    with pytest.raises(ValueError):
+        MarketContext(country=country)
+
+
+@pytest.mark.parametrize("field", ["target_audience", "market_notes"])
+@pytest.mark.parametrize("value", ["", " \t\n"])
+def test_market_context_rejects_blank_optional_fields(field: str, value: str) -> None:
+    with pytest.raises(ValueError):
+        MarketContext(country="Vietnam", **{field: value})

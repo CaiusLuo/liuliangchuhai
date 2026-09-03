@@ -2,8 +2,9 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/001-product-foundation/spec.md`. Phase 0 is complete;
-the current increment permits only the read-only product foundation described there.
+Active spec: `specs/002-product-market-analysis/spec.md` (SPEC + PLAN + RED only).
+Production remains at the completed Issue #1 foundation; do not start Issue #2 GREEN
+until explicitly requested and its constitution phase boundary is aligned.
 
 ## Architecture
 

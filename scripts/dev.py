@@ -48,8 +48,16 @@ def resolve_command(name: str) -> str:
     raise FileNotFoundError(f"Required command not found: {name}")
 
 
+def command_for(name: str, *args: str) -> list[str]:
+    resolved = resolve_command(name)
+    command = [resolved, *args]
+    if os.name == "nt" and Path(resolved).suffix.lower() in {".cmd", ".bat"}:
+        return ["cmd.exe", "/d", "/c", *command]
+    return command
+
+
 def pnpm_command(*args: str) -> list[str]:
-    return [resolve_command("pnpm"), *args]
+    return command_for("pnpm", *args)
 
 
 def require_tools(*names: str) -> None:

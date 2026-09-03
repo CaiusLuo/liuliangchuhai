@@ -34,13 +34,26 @@ def test_resolve_command_falls_back_to_windows_shims(monkeypatch) -> None:
     assert lookups == ["pnpm", "pnpm.cmd"]
 
 
-def test_all_pnpm_commands_use_resolved_executable(monkeypatch) -> None:
-    monkeypatch.setattr(dev, "resolve_command", lambda name: "/tools/pnpm.cmd")
+def test_pnpm_commands_use_resolved_executable(monkeypatch) -> None:
+    monkeypatch.setattr(dev, "resolve_command", lambda name: "/tools/pnpm")
 
     assert dev.pnpm_command("install", "--frozen-lockfile") == [
-        "/tools/pnpm.cmd",
+        "/tools/pnpm",
         "install",
         "--frozen-lockfile",
+    ]
+
+
+def test_pnpm_commands_wrap_windows_shims_without_shell(monkeypatch) -> None:
+    monkeypatch.setattr(dev.os, "name", "nt")
+    monkeypatch.setattr(dev, "resolve_command", lambda name: r"C:\tools\pnpm.CMD")
+
+    assert dev.pnpm_command("check") == [
+        "cmd.exe",
+        "/d",
+        "/c",
+        r"C:\tools\pnpm.CMD",
+        "check",
     ]
 
 

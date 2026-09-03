@@ -5,14 +5,14 @@
 ## Phase A-B: Inspection and Research
 
 - [x] T001 Inspect the repository recursively and record compatibility constraints.
-- [x] T002 Research the five required reference repositories in `docs/research/phase0-reference-analysis.md`.
+- [x] T002 Research the five required reference repositories and record only durable findings in `docs/ARCHITECTURE.md`.
 
 ## Phase C-D: SDD and Architecture Decision
 
 - [x] T003 Initialize official Spec Kit support with its detected Codex integration and portable Python scripts.
 - [x] T004 Establish `.specify/memory/constitution.md`.
 - [x] T005 Create `specs/000-phase0-bootstrap/spec.md` and `plan.md`.
-- [x] T006 Document the architecture in `docs/ARCHITECTURE.md` and `docs/architecture/ADR-0001-pragmatic-hexagonal-architecture.md`.
+- [x] T006 Document the architecture and accepted decisions in `docs/ARCHITECTURE.md`.
 
 ## Phase E: RED
 

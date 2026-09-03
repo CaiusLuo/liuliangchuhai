@@ -28,15 +28,7 @@ Bootstrap a minimal FastAPI/Next.js monorepo using a pragmatic hexagonal backend
 
 ## Constitution Check
 
-- Contract first: port/HTTP contracts and tests precede implementation — PASS.
-- Core independence: import-linter contracts explicitly guard both core layers — PASS.
-- Ports before adapters: both provider abstractions are application-owned — PASS.
-- Test first: RED tasks precede GREEN tasks in `tasks.md` — PASS.
-- Mockable/reliable: mock providers are default and key-free — PASS.
-- Stable API: OpenAPI is the source for generated TypeScript — PASS.
-- Thin presentation: routes only map and invoke — PASS.
-- Cross-platform: Make delegates to Python standard-library orchestration — PASS.
-- Scope boundary: no domain or product feature model is planned — PASS.
+The plan satisfies the constitution: contracts and tests precede implementation, core boundaries are linted, ports precede adapters, mocks are the default, OpenAPI owns frontend contracts, presentation stays thin, and the task runner is cross-platform. The RED-to-GREEN order is recorded in `tasks.md`.
 
 ## Project Structure
 
@@ -56,7 +48,7 @@ apps/
     └── src/{app,features,components,api/generated}/
 scripts/dev.py
 specs/000-phase0-bootstrap/
-docs/{research,architecture}/
+docs/ARCHITECTURE.md
 .specify/
 ```
 

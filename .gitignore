@@ -1,0 +1,18 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.import_linter_cache/
+.venv/
+apps/api/.venv/
+apps/web/.next/
+apps/web/node_modules/
+apps/web/tsconfig.tsbuildinfo
+
+# Spec Kit integration definitions are shareable; runtime state is not.
+.specify/.cache/

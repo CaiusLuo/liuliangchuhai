@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import filecmp
+import os
 import shutil
 import subprocess
 import tempfile
@@ -35,8 +36,29 @@ def run(command: Sequence[str], *, cwd: Path = ROOT) -> None:
     subprocess.run(list(command), cwd=cwd, check=True)
 
 
+def resolve_command(name: str) -> str:
+    """Resolve a command, including Windows command-file shims."""
+    candidates = [name]
+    if os.name == "nt" and Path(name).suffix.lower() not in {".cmd", ".bat", ".exe"}:
+        candidates.extend((f"{name}.cmd", f"{name}.bat"))
+    for candidate in candidates:
+        resolved = shutil.which(candidate)
+        if resolved:
+            return resolved
+    raise FileNotFoundError(f"Required command not found: {name}")
+
+
+def pnpm_command(*args: str) -> list[str]:
+    return [resolve_command("pnpm"), *args]
+
+
 def require_tools(*names: str) -> None:
-    missing = [name for name in names if shutil.which(name) is None]
+    missing: list[str] = []
+    for name in names:
+        try:
+            resolve_command(name)
+        except FileNotFoundError:
+            missing.append(name)
     if missing:
         joined = ", ".join(missing)
         raise SystemExit(f"Missing required tool(s): {joined}")
@@ -63,7 +85,7 @@ def bootstrap() -> None:
     _copy_if_missing(WEB_DIR / ".env.example", WEB_DIR / ".env.local")
     require_tools("uv", "pnpm")
     run(["uv", "sync", "--project", str(API_DIR), "--all-groups", "--locked"])
-    run(["pnpm", "install", "--frozen-lockfile"], cwd=WEB_DIR)
+    run(pnpm_command("install", "--frozen-lockfile"), cwd=WEB_DIR)
 
 
 def dev_api() -> None:
@@ -84,7 +106,7 @@ def dev_api() -> None:
 
 def dev_web() -> None:
     require_tools("pnpm")
-    run(["pnpm", "dev"], cwd=WEB_DIR)
+    run(pnpm_command("dev"), cwd=WEB_DIR)
 
 
 def dev() -> None:
@@ -100,7 +122,7 @@ def dev() -> None:
             ),
             API_DIR,
         ),
-        (["pnpm", "dev"], WEB_DIR),
+        (pnpm_command("dev"), WEB_DIR),
     ]
     processes: list[subprocess.Popen[bytes]] = []
     try:
@@ -190,15 +212,15 @@ def test_acceptance() -> None:
 
 
 def frontend_lint() -> None:
-    run(["pnpm", "lint"], cwd=WEB_DIR)
+    run(pnpm_command("lint"), cwd=WEB_DIR)
 
 
 def frontend_typecheck() -> None:
-    run(["pnpm", "typecheck"], cwd=WEB_DIR)
+    run(pnpm_command("typecheck"), cwd=WEB_DIR)
 
 
 def frontend_build() -> None:
-    run(["pnpm", "build"], cwd=WEB_DIR)
+    run(pnpm_command("build"), cwd=WEB_DIR)
 
 
 def generate_openapi(destination: Path = OPENAPI_FILE) -> None:
@@ -219,14 +241,13 @@ def generate_client(source: Path = OPENAPI_FILE, destination: Path = CLIENT_FILE
         raise SystemExit(f"OpenAPI source does not exist: {source}. Run the openapi task first.")
     destination.parent.mkdir(parents=True, exist_ok=True)
     run(
-        [
-            "pnpm",
+        pnpm_command(
             "exec",
             "openapi-typescript",
             str(source),
             "--output",
             str(destination),
-        ],
+        ),
         cwd=WEB_DIR,
     )
     generated = destination.read_text(encoding="utf-8")

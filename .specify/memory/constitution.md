@@ -56,6 +56,14 @@ all other deferred capabilities remain outside this increment. The amendment
 enables the requested shared product foundation without weakening dependency,
 testing, mockability, or generated-contract rules.
 
+The next Phase 1 increment, `specs/002-product-market-analysis/spec.md` (issue #2),
+is authorized for implementation: validated market context and analysis values,
+an application-owned LLM analysis capability and failure contracts, a thin use
+case, deterministic mock behavior, and bootstrap wiring. This enables the frozen
+product-market analysis core only; real providers, HTTP/frontend surfaces, and
+all other deferred capabilities remain out of scope. Existing architecture and
+testing rules are unchanged.
+
 ## Development Workflow and Quality Gate
 
 Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> verification. Before declaring work complete, run `make check` or, on Windows, `uv run python scripts/dev.py check`. The gate MUST check formatting without mutation, linting, type safety, architecture boundaries, unit/contract/integration/acceptance tests, frontend lint/typecheck, and generated OpenAPI/client drift.
@@ -64,4 +72,4 @@ Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> v
 
 This constitution supersedes informal conventions. Amendments require an explicit specification change, rationale, version update, and review of affected tests, architecture rules, generated contracts, and agent guidance. Reviewers MUST reject untested boundary changes, hidden contract changes, and unjustified complexity.
 
-**Version**: 1.1.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04
+**Version**: 1.2.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04

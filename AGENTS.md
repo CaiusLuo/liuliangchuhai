@@ -2,8 +2,8 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/001-product-foundation/spec.md`. Phase 0 is complete;
-the current increment permits only the read-only product foundation described there.
+Active spec: `specs/002-product-market-analysis/spec.md`. Issue #2 GREEN is authorized
+under constitution 1.2.0; implement only the frozen analysis core and deterministic mock.
 
 ## Architecture
 

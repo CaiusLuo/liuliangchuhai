@@ -2,7 +2,7 @@
 
 ## Goals
 
-Phase 0 is a short-deadline foundation built by multiple contributors and AI coding agents. It must accommodate future AI and digital-human integrations while keeping implementations replaceable and the development/demo path reliable without credentials or third-party availability.
+The completed Phase 0 foundation accommodates future AI and digital-human integrations while keeping implementations replaceable and the development/demo path reliable without credentials or third-party availability. The current increment adds only the read-only product foundation defined in [specs/001-product-foundation](../specs/001-product-foundation/spec.md).
 
 ## Dependency Model
 
@@ -22,7 +22,7 @@ The outer layers are replaceable. Infrastructure implements application capabili
 
 ## Layer Responsibilities
 
-- **domain** — future business concepts and invariants. Phase 0 intentionally defines none.
+- **domain** — canonical `Product` values and invariants, independent of frameworks and storage.
 - **application** — use cases, neutral DTOs, and ports for external capabilities.
 - **infrastructure** — concrete provider adapters and external-system mapping; no business decisions.
 - **presentation** — FastAPI schemas and routers for validation, mapping, use-case invocation, and response mapping.
@@ -39,6 +39,16 @@ application port ← infrastructure mock adapter
                  ← infrastructure real adapter (future)
                  ← bootstrap-selected implementation
 ```
+
+`ProductRepository` is an application-owned async port returning the single
+immutable domain `Product` representation. `ListProducts` and `GetProduct` depend
+only on that port; `GetProduct` models missing IDs with `ProductNotFound`.
+`JsonProductRepository` in `infrastructure/products/` reads and validates a UTF-8
+catalog once, rejecting duplicate IDs and invalid records. It then serves a
+snapshot with no further I/O. Bootstrap resolves the bundled demo resource using
+`importlib.resources` and shares one adapter between both use cases. A deterministic
+test fake and the JSON adapter run the same repository contract suite. There is
+no product HTTP surface, so OpenAPI and TypeScript artifacts are unchanged.
 
 ## API Contract
 
@@ -67,7 +77,7 @@ Cross-module behavior is specified before implementation. Application behavior f
 - **Pragmatic hexagonal architecture:** five explicit layers make provider seams visible and enforceable without speculative enterprise structure.
 - **No DI framework for now:** small protocols and an explicit composition root are sufficient for Phase 0.
 - **Mock-first integrations:** missing or failed third-party services must not block the supported demo path.
-- **No Phase 1 infrastructure:** no database, Redis, message queue, microservices, real provider SDK, product-selection behavior, shopping assistant, prompts, or RAG.
+- **Bounded Phase 1 foundation:** only the read-only curated JSON product catalog; no database, Redis, message queue, microservices, real provider SDK, product-selection behavior, shopping assistant, prompts, or RAG.
 - **Portable task runner:** Python standard-library path/process APIs provide one implementation on macOS, Linux, and Windows.
 - **Executable governance:** import rules, contract tests, and generation drift checks enforce the boundaries that prose alone cannot.
 

@@ -1,1 +1,1 @@
-"""Business concepts belong here once a later-phase specification defines them."""
+"""Canonical business values and invariants, independent of outer layers."""

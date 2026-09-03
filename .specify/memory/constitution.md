@@ -48,6 +48,14 @@ Phase 0 is limited to architecture, contracts, dependency boundaries, developmen
 
 New top-level directories require an architectural reason. New dependencies and abstractions require a current requirement and test. Prefer the smallest design that satisfies this constitution.
 
+Phase 0 is complete. The first Phase 1 increment is governed by
+`specs/001-product-foundation/spec.md` (issue #1): a canonical Product, an
+application repository port, a curated read-only JSON adapter, demo data, and
+read-only application use cases. This limited local catalog is now permitted;
+all other deferred capabilities remain outside this increment. The amendment
+enables the requested shared product foundation without weakening dependency,
+testing, mockability, or generated-contract rules.
+
 ## Development Workflow and Quality Gate
 
 Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> verification. Before declaring work complete, run `make check` or, on Windows, `uv run python scripts/dev.py check`. The gate MUST check formatting without mutation, linting, type safety, architecture boundaries, unit/contract/integration/acceptance tests, frontend lint/typecheck, and generated OpenAPI/client drift.
@@ -56,4 +64,4 @@ Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> v
 
 This constitution supersedes informal conventions. Amendments require an explicit specification change, rationale, version update, and review of affected tests, architecture rules, generated contracts, and agent guidance. Reviewers MUST reject untested boundary changes, hidden contract changes, and unjustified complexity.
 
-**Version**: 1.0.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04
+**Version**: 1.1.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04

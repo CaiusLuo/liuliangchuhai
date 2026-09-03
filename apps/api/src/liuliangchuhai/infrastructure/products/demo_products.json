@@ -1,0 +1,41 @@
+[
+  {
+    "id": "liuzhou-luosifen",
+    "name": "柳州螺蛳粉",
+    "category": "地方食品",
+    "description": "以米粉、酸笋和配料呈现柳州风味的演示商品。此记录不对应具体品牌或销售规格。",
+    "origin": "广西柳州",
+    "cultural_background": "螺蛳粉是柳州地方饮食的代表之一，体现了当地对酸、辣、鲜风味的偏好。",
+    "images": [],
+    "usage": "米粉煮熟后搭配汤底与配料食用；具体烹煮方式以实际产品说明为准。",
+    "ingredients": ["米粉", "酸笋", "腐竹", "花生"],
+    "price": null,
+    "purchase_url": null
+  },
+  {
+    "id": "wuzhou-liubao-tea",
+    "name": "梧州六堡茶",
+    "category": "茶叶",
+    "description": "用于展示广西茶文化的六堡茶演示商品，不代表具体品牌、年份或等级。",
+    "origin": "广西梧州",
+    "cultural_background": "六堡茶与梧州地方茶文化相联系，是广西具有地方特色的茶品。",
+    "images": [],
+    "usage": "取适量茶叶冲泡饮用，投茶量和冲泡时间按个人口味及实际产品说明调整。",
+    "ingredients": ["茶叶"],
+    "price": null,
+    "purchase_url": null
+  },
+  {
+    "id": "guilin-luohanguo",
+    "name": "桂林罗汉果",
+    "category": "农产干货",
+    "description": "用于展示桂林地方农产品的干罗汉果演示商品，不对应具体品牌或包装。",
+    "origin": "广西桂林",
+    "cultural_background": "罗汉果是桂林地区具有代表性的地方农产品，常见于当地的日常饮食与饮品中。",
+    "images": [],
+    "usage": "按实际产品说明处理后泡饮或用于烹饪。",
+    "ingredients": ["罗汉果"],
+    "price": null,
+    "purchase_url": null
+  }
+]

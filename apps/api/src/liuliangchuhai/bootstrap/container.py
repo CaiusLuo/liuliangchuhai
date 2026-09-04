@@ -5,6 +5,7 @@ from liuliangchuhai.application.ports.digital_human import DigitalHumanPort
 from liuliangchuhai.application.ports.llm import LLMPort
 from liuliangchuhai.application.ports.product_repository import ProductRepository
 from liuliangchuhai.application.use_cases.analyze_product import AnalyzeProductUseCase
+from liuliangchuhai.application.use_cases.analyze_product_by_id import AnalyzeProductByIdUseCase
 from liuliangchuhai.application.use_cases.get_product import GetProduct
 from liuliangchuhai.application.use_cases.get_system_status import GetSystemStatus
 from liuliangchuhai.application.use_cases.list_products import ListProducts
@@ -23,6 +24,7 @@ class Container:
     list_products: ListProducts
     get_product: GetProduct
     analyze_product: AnalyzeProductUseCase
+    analyze_product_by_id: AnalyzeProductByIdUseCase
 
 
 def _build_llm(provider: str) -> LLMPort:
@@ -43,12 +45,15 @@ def build_container(settings: Settings) -> Container:
     catalog = files("liuliangchuhai.infrastructure.products").joinpath("demo_products.json")
     with as_file(catalog) as path:
         product_repository = JsonProductRepository(path)
+    get_product = GetProduct(product_repository)
+    analyze_product = AnalyzeProductUseCase(llm)
     return Container(
         llm=llm,
         digital_human=digital_human,
         get_system_status=GetSystemStatus(llm=llm, digital_human=digital_human),
         product_repository=product_repository,
         list_products=ListProducts(product_repository),
-        get_product=GetProduct(product_repository),
-        analyze_product=AnalyzeProductUseCase(llm),
+        get_product=get_product,
+        analyze_product=analyze_product,
+        analyze_product_by_id=AnalyzeProductByIdUseCase(get_product, analyze_product),
     )

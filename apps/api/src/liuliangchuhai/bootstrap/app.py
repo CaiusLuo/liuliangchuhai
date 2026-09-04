@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from liuliangchuhai.bootstrap.container import build_container
 from liuliangchuhai.bootstrap.settings import Settings
+from liuliangchuhai.presentation.http.product_analysis_router import create_product_analysis_router
 from liuliangchuhai.presentation.http.router import create_router
 
 
@@ -18,4 +19,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         allow_headers=["*"],
     )
     app.include_router(create_router(container.get_system_status))
+    app.include_router(create_product_analysis_router(container.analyze_product_by_id))
     return app

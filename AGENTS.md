@@ -2,8 +2,9 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/002-product-market-analysis/spec.md`. Issue #2 GREEN is authorized
-under constitution 1.2.0; implement only the frozen analysis core and deterministic mock.
+Active spec: `specs/003-product-analysis-api/spec.md`. Issue #3 GREEN is authorized
+under constitution 1.3.0; implement only the frozen product-analysis HTTP increment
+and regenerate its OpenAPI/client artifacts. Do not start Issue #4.
 
 ## Architecture
 

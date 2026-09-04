@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 from liuliangchuhai.application.ports.product_repository import ProductRepository
+from liuliangchuhai.domain.market_analysis import ProductMarketAnalysis, RecommendationLevel
 from liuliangchuhai.domain.product import Product
 from liuliangchuhai.infrastructure.products.json_repository import JsonProductRepository
 
@@ -66,3 +67,18 @@ def repository_factory(
         return JsonProductRepository(path)
 
     return create
+
+
+@pytest.fixture
+def product_analysis_result() -> ProductMarketAnalysis:
+    return ProductMarketAnalysis(
+        recommendation=RecommendationLevel.CAUTION,
+        score=50,
+        summary="Test heuristic only; market assumptions need validation.",
+        target_audiences=("Students", "Home cooks"),
+        strengths=("Distinctive flavor",),
+        risks=("Taste preferences need validation",),
+        cultural_advantages=("Guangxi food heritage",),
+        marketing_suggestions=("Test small sample packs",),
+        content_directions=("Explain preparation",),
+    )

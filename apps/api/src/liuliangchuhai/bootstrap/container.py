@@ -18,6 +18,7 @@ from liuliangchuhai.application.use_cases.list_products import ListProducts
 from liuliangchuhai.bootstrap.settings import Settings
 from liuliangchuhai.infrastructure.content.mock import MockContentPlannerAdapter
 from liuliangchuhai.infrastructure.digital_human.mock import MockDigitalHumanAdapter
+from liuliangchuhai.infrastructure.llm.deepseek import DeepSeekLLMAdapter
 from liuliangchuhai.infrastructure.llm.mock import MockLLMAdapter
 from liuliangchuhai.infrastructure.products.json_repository import JsonProductRepository
 
@@ -38,10 +39,17 @@ class Container:
     analyze_product_by_id: AnalyzeProductByIdUseCase
 
 
-def _build_llm(provider: str) -> LLMPort:
-    if provider == "mock":
+def _build_llm(settings: Settings) -> LLMPort:
+    if settings.llm_provider == "mock":
         return MockLLMAdapter()
-    raise ValueError(f"Unsupported LLM provider: {provider!r}")
+    if settings.llm_provider == "deepseek":
+        assert settings.deepseek_api_key is not None
+        return DeepSeekLLMAdapter(
+            api_key=settings.deepseek_api_key.get_secret_value(),
+            model=settings.deepseek_model,
+            timeout_seconds=settings.deepseek_timeout_seconds,
+        )
+    raise ValueError(f"Unsupported LLM provider: {settings.llm_provider!r}")
 
 
 def _build_digital_human(provider: str) -> DigitalHumanPort:
@@ -51,7 +59,7 @@ def _build_digital_human(provider: str) -> DigitalHumanPort:
 
 
 def build_container(settings: Settings) -> Container:
-    llm = _build_llm(settings.llm_provider)
+    llm = _build_llm(settings)
     digital_human = _build_digital_human(settings.digital_human_provider)
     catalog = files("liuliangchuhai.infrastructure.products").joinpath("demo_products.json")
     with as_file(catalog) as path:

@@ -7,6 +7,7 @@ from liuliangchuhai.domain.digital_human import DigitalHumanGenerationInput, Gen
 from liuliangchuhai.domain.market_analysis import MarketContext, ProductMarketAnalysis
 from liuliangchuhai.domain.product import Product
 from liuliangchuhai.infrastructure.digital_human.mock import MockDigitalHumanAdapter
+from liuliangchuhai.infrastructure.llm.deepseek import DeepSeekLLMAdapter
 from liuliangchuhai.infrastructure.llm.mock import MockLLMAdapter
 
 
@@ -15,6 +16,14 @@ def test_container_wires_mock_providers() -> None:
 
     assert isinstance(container.llm, MockLLMAdapter)
     assert isinstance(container.digital_human, MockDigitalHumanAdapter)
+
+
+def test_container_wires_deepseek_provider() -> None:
+    container = build_container(
+        Settings(_env_file=None, llm_provider="deepseek", deepseek_api_key="secret")
+    )
+
+    assert isinstance(container.llm, DeepSeekLLMAdapter)
 
 
 @pytest.mark.asyncio

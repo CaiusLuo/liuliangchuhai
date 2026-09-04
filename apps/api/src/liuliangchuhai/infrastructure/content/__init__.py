@@ -1,0 +1,1 @@
+"""Content-planning infrastructure adapters."""

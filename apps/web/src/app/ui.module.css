@@ -1,0 +1,73 @@
+.container, .page, .navigation, .footer {
+  width: min(var(--page-max), calc(100% - 2 * var(--page-gutter)));
+  margin: 0 auto;
+}
+
+.content { flex: 1; min-width: 0; }
+.page { padding: var(--section-space) 0; overflow-wrap: anywhere; }
+.breadcrumb { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; font-size: 13px; color: var(--muted); }
+.pageHeader { max-width: 760px; margin-bottom: 36px; }
+.pageHeader > p:last-child { color: var(--muted); margin-top: 16px; font-size: 16px; line-height: 1.8; }
+.eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: 1.7px; line-height: 1.6; text-transform: uppercase; }
+
+.primary, .secondary, .navAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 48px;
+  padding: 12px 19px;
+  border: 1px solid transparent;
+  border-radius: var(--control-radius);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+.primary:hover:not(:disabled) { background: #41563c; }
+.secondary, .navAction { background: transparent; border-color: #b8bfaf; color: var(--ink); }
+.secondary:hover:not(:disabled), .navAction:hover { background: var(--surface-muted); }
+.textLink { display: inline-flex; align-items: center; gap: 16px; color: var(--ink); font-size: 13px; font-weight: 600; text-decoration: none; }
+.textLink:hover { text-decoration: underline; }
+
+.card, .panel, .state { border: 1px solid var(--line); border-radius: var(--card-radius); background: var(--surface); }
+.panel, .state { padding: var(--card-padding); min-width: 0; }
+.badge { display: inline-block; width: fit-content; padding: 3px 8px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: var(--small-size); line-height: 1.6; }
+.state { padding: 40px; background: var(--surface-muted); }
+.state p { margin: 12px 0 20px; color: var(--muted); }
+.state[role="alert"], .error { border-color: #e2b9ac; background: var(--error-surface); color: var(--error); }
+.state[role="alert"] p { color: var(--error); }
+.status { color: var(--accent); font-size: var(--small-size); min-height: 1.5em; margin-top: 16px; }
+.status:not(:empty) { padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--control-radius); background: var(--surface-muted); }
+.error { padding: 12px; border: 1px solid #e2b9ac; border-left: 3px solid var(--error); border-radius: var(--control-radius); margin-top: 16px; }
+
+.navigation { display: flex; align-items: center; justify-content: space-between; min-height: 102px; border-bottom: 1px solid var(--line); gap: 24px; }
+.navigation a { text-decoration: none; }
+.brand { display: flex; align-items: center; gap: 11px; font-size: 19px; font-weight: 700; letter-spacing: -0.6px; }
+.brandMark { display: grid; place-items: center; width: 38px; height: 42px; background: var(--ink); color: var(--paper); border-radius: 20px 20px 4px 4px; font-size: 27px; font-weight: 400; }
+.brandCaption { display: block; font-size: 8px; letter-spacing: 1.6px; margin-top: 3px; font-weight: 400; }
+.navigation nav { display: flex; align-items: center; gap: 32px; font-size: 13px; font-weight: 600; }
+.navProducts:hover { text-decoration: underline; }
+.skipLink { position: absolute; top: -100px; left: 24px; padding: 12px; z-index: 10; background: var(--surface); }
+.skipLink:focus { top: 12px; }
+.footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; border-top: 1px solid var(--line); padding: 25px 0; color: var(--muted); font-size: 11px; }
+.footer > span:first-child { color: var(--ink); font-size: 13px; font-weight: 600; }
+.footerChinese { margin-left: 9px; font-weight: 400; }
+
+@media (max-width: 760px) {
+  .pageHeader { margin-bottom: 28px; }
+  .pageHeader > p:last-child { font-size: var(--body-size); }
+  .state { padding: var(--card-padding); }
+  .navigation { min-height: 82px; gap: 12px; }
+  .brand { font-size: 16px; gap: 8px; }
+  .brandMark { width: 31px; height: 36px; font-size: 23px; }
+  .brandCaption { font-size: 6px; letter-spacing: 1px; }
+  .navigation nav { gap: 12px; }
+  .navProducts { display: none; }
+  .navAction { padding: 9px 11px; gap: 10px; font-size: 11px; min-height: 44px; }
+  .footer { flex-wrap: wrap; padding: 23px 0; row-gap: 11px; }
+  .footer > span:last-child { flex-basis: 100%; }
+}

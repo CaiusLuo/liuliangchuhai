@@ -5,7 +5,7 @@ import "./styles.css"
 
 export const metadata: Metadata = {
   title: "liuliangchuhai",
-  description: "Phase 0 development shell",
+  description: "AI-assisted market analysis and content planning for Guangxi products entering ASEAN markets.",
 }
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

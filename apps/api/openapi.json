@@ -1,6 +1,19 @@
 {
   "components": {
     "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
       "HealthResponse": {
         "properties": {
           "providers": {
@@ -17,6 +30,165 @@
           "providers"
         ],
         "title": "HealthResponse",
+        "type": "object"
+      },
+      "ProductAnalysisErrorResponse": {
+        "properties": {
+          "code": {
+            "enum": [
+              "product_not_found",
+              "llm_unavailable",
+              "invalid_llm_response"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ProductAnalysisErrorResponse",
+        "type": "object"
+      },
+      "ProductAnalysisRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "country": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Country",
+            "type": "string"
+          },
+          "market_notes": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Notes"
+          },
+          "product_id": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Product Id",
+            "type": "string"
+          },
+          "target_audience": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Audience"
+          }
+        },
+        "required": [
+          "product_id",
+          "country"
+        ],
+        "title": "ProductAnalysisRequest",
+        "type": "object"
+      },
+      "ProductMarketAnalysisResponse": {
+        "properties": {
+          "content_directions": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Content Directions",
+            "type": "array"
+          },
+          "cultural_advantages": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Cultural Advantages",
+            "type": "array"
+          },
+          "marketing_suggestions": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Marketing Suggestions",
+            "type": "array"
+          },
+          "recommendation": {
+            "$ref": "#/components/schemas/RecommendationLevel"
+          },
+          "risks": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Risks",
+            "type": "array"
+          },
+          "score": {
+            "description": "Heuristic assessment, not a sales forecast.",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score",
+            "type": "integer"
+          },
+          "strengths": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Strengths",
+            "type": "array"
+          },
+          "summary": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Summary",
+            "type": "string"
+          },
+          "target_audiences": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Target Audiences",
+            "type": "array"
+          }
+        },
+        "required": [
+          "recommendation",
+          "score",
+          "summary",
+          "target_audiences",
+          "strengths",
+          "risks",
+          "cultural_advantages",
+          "marketing_suggestions",
+          "content_directions"
+        ],
+        "title": "ProductMarketAnalysisResponse",
         "type": "object"
       },
       "ProviderStatusResponse": {
@@ -52,6 +224,56 @@
         ],
         "title": "ProvidersResponse",
         "type": "object"
+      },
+      "RecommendationLevel": {
+        "enum": [
+          "strong_fit",
+          "fit",
+          "caution",
+          "not_recommended"
+        ],
+        "title": "RecommendationLevel",
+        "type": "string"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
       }
     }
   },
@@ -77,6 +299,74 @@
           }
         },
         "summary": "Get Health"
+      }
+    },
+    "/product-analysis": {
+      "post": {
+        "operationId": "analyze_product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductAnalysisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductMarketAnalysisResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAnalysisErrorResponse"
+                }
+              }
+            },
+            "description": "Product not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAnalysisErrorResponse"
+                }
+              }
+            },
+            "description": "Analysis service returned an invalid response"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAnalysisErrorResponse"
+                }
+              }
+            },
+            "description": "Analysis service is temporarily unavailable"
+          }
+        },
+        "summary": "Analyze Product"
       }
     }
   }

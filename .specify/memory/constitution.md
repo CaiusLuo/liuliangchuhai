@@ -64,6 +64,15 @@ product-market analysis core only; real providers, HTTP/frontend surfaces, and
 all other deferred capabilities remain out of scope. Existing architecture and
 testing rules are unchanged.
 
+The next Phase 1 increment, `specs/003-product-analysis-api/spec.md` (issue #3),
+is authorized for implementation after review of its frozen SPEC and RED tests:
+compose the existing product lookup and analysis use cases, expose the frozen
+POST /product-analysis request/response/error contract through thin Presentation
+schemas and mappers, wire it in bootstrap, and regenerate OpenAPI/TypeScript.
+This makes the existing mock analysis available over HTTP; frontend features,
+real providers, Issue #4, and other deferred capabilities remain out of scope.
+Existing core contracts, architecture gates, and testing rules are unchanged.
+
 ## Development Workflow and Quality Gate
 
 Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> verification. Before declaring work complete, run `make check` or, on Windows, `uv run python scripts/dev.py check`. The gate MUST check formatting without mutation, linting, type safety, architecture boundaries, unit/contract/integration/acceptance tests, frontend lint/typecheck, and generated OpenAPI/client drift.
@@ -72,4 +81,4 @@ Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> v
 
 This constitution supersedes informal conventions. Amendments require an explicit specification change, rationale, version update, and review of affected tests, architecture rules, generated contracts, and agent guidance. Reviewers MUST reject untested boundary changes, hidden contract changes, and unjustified complexity.
 
-**Version**: 1.2.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04
+**Version**: 1.3.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04

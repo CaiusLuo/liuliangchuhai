@@ -22,10 +22,32 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/product-analysis": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Analyze Product */
+        post: operations["analyze_product"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
         /** HealthResponse */
         HealthResponse: {
             providers: components["schemas"]["ProvidersResponse"];
@@ -34,6 +56,50 @@ export interface components {
              * @constant
              */
             status: "ok";
+        };
+        /** ProductAnalysisErrorResponse */
+        ProductAnalysisErrorResponse: {
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "product_not_found" | "llm_unavailable" | "invalid_llm_response";
+            /** Message */
+            message: string;
+        };
+        /** ProductAnalysisRequest */
+        ProductAnalysisRequest: {
+            /** Country */
+            country: string;
+            /** Market Notes */
+            market_notes?: string | null;
+            /** Product Id */
+            product_id: string;
+            /** Target Audience */
+            target_audience?: string | null;
+        };
+        /** ProductMarketAnalysisResponse */
+        ProductMarketAnalysisResponse: {
+            /** Content Directions */
+            content_directions: string[];
+            /** Cultural Advantages */
+            cultural_advantages: string[];
+            /** Marketing Suggestions */
+            marketing_suggestions: string[];
+            recommendation: components["schemas"]["RecommendationLevel"];
+            /** Risks */
+            risks: string[];
+            /**
+             * Score
+             * @description Heuristic assessment, not a sales forecast.
+             */
+            score: number;
+            /** Strengths */
+            strengths: string[];
+            /** Summary */
+            summary: string;
+            /** Target Audiences */
+            target_audiences: string[];
         };
         /** ProviderStatusResponse */
         ProviderStatusResponse: {
@@ -46,6 +112,24 @@ export interface components {
         ProvidersResponse: {
             digital_human: components["schemas"]["ProviderStatusResponse"];
             llm: components["schemas"]["ProviderStatusResponse"];
+        };
+        /**
+         * RecommendationLevel
+         * @enum {string}
+         */
+        RecommendationLevel: "strong_fit" | "fit" | "caution" | "not_recommended";
+        /** ValidationError */
+        ValidationError: {
+            /** Context */
+            ctx?: Record<string, never>;
+            /** Input */
+            input?: unknown;
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
         };
     };
     responses: never;
@@ -72,6 +156,66 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+        };
+    };
+    analyze_product: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProductAnalysisRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductMarketAnalysisResponse"];
+                };
+            };
+            /** @description Product not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAnalysisErrorResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Analysis service returned an invalid response */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAnalysisErrorResponse"];
+                };
+            };
+            /** @description Analysis service is temporarily unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAnalysisErrorResponse"];
                 };
             };
         };

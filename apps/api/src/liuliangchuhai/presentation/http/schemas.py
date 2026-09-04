@@ -1,6 +1,8 @@
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints
+
+from liuliangchuhai.domain.market_analysis import RecommendationLevel
 
 
 class ProviderStatusResponse(BaseModel):
@@ -16,3 +18,35 @@ class ProvidersResponse(BaseModel):
 class HealthResponse(BaseModel):
     status: Literal["ok"]
     providers: ProvidersResponse
+
+
+NonBlankString = Annotated[str, StringConstraints(strict=True, min_length=1, pattern=r"\S")]
+
+
+class ProductAnalysisRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    product_id: NonBlankString
+    country: NonBlankString
+    target_audience: NonBlankString | None = None
+    market_notes: NonBlankString | None = None
+
+
+class ProductMarketAnalysisResponse(BaseModel):
+    recommendation: RecommendationLevel
+    score: Annotated[
+        int,
+        Field(strict=True, ge=0, le=100, description="Heuristic assessment, not a sales forecast."),
+    ]
+    summary: NonBlankString
+    target_audiences: list[NonBlankString]
+    strengths: list[NonBlankString]
+    risks: list[NonBlankString]
+    cultural_advantages: list[NonBlankString]
+    marketing_suggestions: list[NonBlankString]
+    content_directions: list[NonBlankString]
+
+
+class ProductAnalysisErrorResponse(BaseModel):
+    code: Literal["product_not_found", "llm_unavailable", "invalid_llm_response"]
+    message: str

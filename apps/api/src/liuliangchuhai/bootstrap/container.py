@@ -11,6 +11,7 @@ from liuliangchuhai.application.use_cases.create_content_plan import CreateConte
 from liuliangchuhai.application.use_cases.create_content_plan_by_id import (
     CreateContentPlanByIdUseCase,
 )
+from liuliangchuhai.application.use_cases.generate_digital_human import GenerateDigitalHumanUseCase
 from liuliangchuhai.application.use_cases.get_product import GetProduct
 from liuliangchuhai.application.use_cases.get_system_status import GetSystemStatus
 from liuliangchuhai.application.use_cases.list_products import ListProducts
@@ -28,6 +29,7 @@ class Container:
     create_content_plan: CreateContentPlanUseCase
     create_content_plan_by_id: CreateContentPlanByIdUseCase
     digital_human: DigitalHumanPort
+    generate_digital_human: GenerateDigitalHumanUseCase
     get_system_status: GetSystemStatus
     product_repository: ProductRepository
     list_products: ListProducts
@@ -64,6 +66,7 @@ def build_container(settings: Settings) -> Container:
         create_content_plan_by_id=CreateContentPlanByIdUseCase(get_product, create_content_plan),
         llm=llm,
         digital_human=digital_human,
+        generate_digital_human=GenerateDigitalHumanUseCase(digital_human),
         get_system_status=GetSystemStatus(llm=llm, digital_human=digital_human),
         product_repository=product_repository,
         list_products=ListProducts(product_repository),

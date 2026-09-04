@@ -67,6 +67,7 @@ def analysis_app(
     container = SimpleNamespace(
         get_system_status=FakeGetSystemStatus(),
         analyze_product_by_id=analysis_use_case,
+        create_content_plan_by_id=SimpleNamespace(execute=AsyncMock()),
         list_products=SimpleNamespace(
             execute=AsyncMock(side_effect=AssertionError("Analysis must not list products"))
         ),

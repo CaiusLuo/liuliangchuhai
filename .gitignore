@@ -13,6 +13,3 @@ apps/api/.venv/
 apps/web/.next/
 apps/web/node_modules/
 apps/web/tsconfig.tsbuildinfo
-
-# Spec Kit integration definitions are shareable; runtime state is not.
-.specify/.cache/

@@ -1,3 +1,8 @@
+## Maintainer Merge Policy
+
+- [ ] I understand that contributors must not self-merge this PR into `main`.
+- [ ] I will wait for `@CaiusLuo` to review and perform the merge after required checks pass.
+
 ## Related Issue
 
 Closes #<!-- replace with issue number, e.g. Closes #9 -->

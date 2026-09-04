@@ -51,6 +51,7 @@ def read_boundary(
         get_product=Mock(spec=GetProduct),
         analyze_product_by_id=Mock(spec=AnalyzeProductByIdUseCase),
         get_system_status=real.get_system_status,
+        create_content_plan_by_id=real.create_content_plan_by_id,
     )
     # Non-alphabetical order and non-null Decimal expose accidental sorting/coercion.
     reads.list_products.execute.return_value = products

@@ -1,6 +1,228 @@
 {
   "components": {
     "schemas": {
+      "ContentPlanAnalysis": {
+        "additionalProperties": false,
+        "properties": {
+          "content_directions": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Content Directions",
+            "type": "array"
+          },
+          "cultural_advantages": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Cultural Advantages",
+            "type": "array"
+          },
+          "marketing_suggestions": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Marketing Suggestions",
+            "type": "array"
+          },
+          "recommendation": {
+            "$ref": "#/components/schemas/RecommendationLevel"
+          },
+          "risks": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Risks",
+            "type": "array"
+          },
+          "score": {
+            "description": "Heuristic assessment, not a sales forecast.",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score",
+            "type": "integer"
+          },
+          "strengths": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Strengths",
+            "type": "array"
+          },
+          "summary": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Summary",
+            "type": "string"
+          },
+          "target_audiences": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "title": "Target Audiences",
+            "type": "array"
+          }
+        },
+        "required": [
+          "recommendation",
+          "score",
+          "summary",
+          "target_audiences",
+          "strengths",
+          "risks",
+          "cultural_advantages",
+          "marketing_suggestions",
+          "content_directions"
+        ],
+        "title": "ContentPlanAnalysis",
+        "type": "object"
+      },
+      "ContentPlanErrorResponse": {
+        "properties": {
+          "code": {
+            "const": "content_planning_failed",
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "const": "Unable to create content plan. Please try again.",
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ContentPlanErrorResponse",
+        "type": "object"
+      },
+      "ContentPlanRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/ContentPlanAnalysis"
+          },
+          "country": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Country",
+            "type": "string"
+          },
+          "market_notes": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Market Notes"
+          },
+          "product_id": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Product Id",
+            "type": "string"
+          },
+          "target_audience": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Audience"
+          },
+          "target_language": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Target Language",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product_id",
+          "country",
+          "target_language",
+          "analysis"
+        ],
+        "title": "ContentPlanRequest",
+        "type": "object"
+      },
+      "ContentPlanResponse": {
+        "properties": {
+          "image_prompt": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Image Prompt",
+            "type": "string"
+          },
+          "key_selling_points": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Key Selling Points",
+            "type": "array"
+          },
+          "live_script": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Live Script",
+            "type": "string"
+          },
+          "short_video_idea": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Short Video Idea",
+            "type": "string"
+          },
+          "short_video_prompt": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Short Video Prompt",
+            "type": "string"
+          },
+          "social_caption": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Social Caption",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key_selling_points",
+          "image_prompt",
+          "short_video_idea",
+          "short_video_prompt",
+          "live_script",
+          "social_caption"
+        ],
+        "title": "ContentPlanResponse",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -402,6 +624,64 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/content-plan": {
+      "post": {
+        "operationId": "create_content_plan",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentPlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentPlanResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductNotFoundResponse"
+                }
+              }
+            },
+            "description": "Product not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentPlanErrorResponse"
+                }
+              }
+            },
+            "description": "Content planning failed"
+          }
+        },
+        "summary": "Create Content Plan"
+      }
+    },
     "/health": {
       "get": {
         "operationId": "get_health",

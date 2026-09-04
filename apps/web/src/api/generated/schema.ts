@@ -5,6 +5,23 @@
  */
 
 export interface paths {
+    "/content-plan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Content Plan */
+        post: operations["create_content_plan"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/health": {
         parameters: {
             query?: never;
@@ -77,6 +94,71 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** ContentPlanAnalysis */
+        ContentPlanAnalysis: {
+            /** Content Directions */
+            content_directions: string[];
+            /** Cultural Advantages */
+            cultural_advantages: string[];
+            /** Marketing Suggestions */
+            marketing_suggestions: string[];
+            recommendation: components["schemas"]["RecommendationLevel"];
+            /** Risks */
+            risks: string[];
+            /**
+             * Score
+             * @description Heuristic assessment, not a sales forecast.
+             */
+            score: number;
+            /** Strengths */
+            strengths: string[];
+            /** Summary */
+            summary: string;
+            /** Target Audiences */
+            target_audiences: string[];
+        };
+        /** ContentPlanErrorResponse */
+        ContentPlanErrorResponse: {
+            /**
+             * Code
+             * @constant
+             */
+            code: "content_planning_failed";
+            /**
+             * Message
+             * @constant
+             */
+            message: "Unable to create content plan. Please try again.";
+        };
+        /** ContentPlanRequest */
+        ContentPlanRequest: {
+            analysis: components["schemas"]["ContentPlanAnalysis"];
+            /** Country */
+            country: string;
+            /** Market Notes */
+            market_notes?: string | null;
+            /** Product Id */
+            product_id: string;
+            /** Target Audience */
+            target_audience?: string | null;
+            /** Target Language */
+            target_language: string;
+        };
+        /** ContentPlanResponse */
+        ContentPlanResponse: {
+            /** Image Prompt */
+            image_prompt: string;
+            /** Key Selling Points */
+            key_selling_points: string[];
+            /** Live Script */
+            live_script: string;
+            /** Short Video Idea */
+            short_video_idea: string;
+            /** Short Video Prompt */
+            short_video_prompt: string;
+            /** Social Caption */
+            social_caption: string;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -217,6 +299,57 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    create_content_plan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContentPlanRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentPlanResponse"];
+                };
+            };
+            /** @description Product not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductNotFoundResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Content planning failed */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentPlanErrorResponse"];
+                };
+            };
+        };
+    };
     get_health: {
         parameters: {
             query?: never;

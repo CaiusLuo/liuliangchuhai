@@ -1,0 +1,44 @@
+.page {
+  width: min(64rem, calc(100% - 3rem));
+  margin: clamp(3rem, 12vh, 8rem) auto;
+  line-height: 1.6;
+}
+
+.page h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.intro {
+  max-width: 40rem;
+  margin: 1.5rem 0 2rem;
+  color: #cbd5df;
+  font-size: 1.15rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.actions a {
+  color: #7dd3fc;
+  font-weight: 600;
+  text-underline-offset: 0.3rem;
+}
+
+.actions .primary {
+  padding: 0.85rem 1.2rem;
+  border-radius: 0.6rem;
+  background: #7dd3fc;
+  color: #101827;
+  text-decoration: none;
+}
+
+.primary:hover { background: #bae6fd; }
+.actions a:focus-visible { outline: 3px solid #7dd3fc; outline-offset: 5px; }
+.flow { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #334155; }
+.note { color: #94a3b8; font-size: 0.9rem; }

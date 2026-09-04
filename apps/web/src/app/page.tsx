@@ -1,27 +1,21 @@
-import { getHealth } from "@/api/health"
+import Link from "next/link"
 
-export default async function Home() {
-  const health = await getHealth()
+import styles from "./page.module.css"
 
+export default function Home() {
   return (
-    <main>
-      <p className="eyebrow">Phase 0</p>
-      <h1>liuliangchuhai</h1>
-      <p>Architecture and provider contracts are ready for later feature work.</p>
-      <dl>
-        <div>
-          <dt>API</dt>
-          <dd>{health?.status ?? "unavailable"}</dd>
-        </div>
-        <div>
-          <dt>LLM provider</dt>
-          <dd>{health?.providers.llm.provider ?? "unavailable"}</dd>
-        </div>
-        <div>
-          <dt>Digital-human provider</dt>
-          <dd>{health?.providers.digital_human.provider ?? "unavailable"}</dd>
-        </div>
-      </dl>
+    <main className={styles.page}>
+      <p className="eyebrow">Guangxi → ASEAN</p>
+      <h1>Local products.<br />New market possibilities.</h1>
+      <p className={styles.intro}>
+        AI-assisted market analysis and content planning for Guangxi products entering ASEAN markets.
+      </p>
+      <nav className={styles.actions} aria-label="Start exploring">
+        <Link className={styles.primary} href="/analysis">Start AI analysis →</Link>
+        <Link href="/products">Browse products →</Link>
+      </nav>
+      <p className={styles.flow}>Choose a product · Explore market fit · Create a content plan</p>
+      <p className={styles.note}>Try the complete flow with deterministic mock providers. No API keys needed.</p>
     </main>
   )
 }

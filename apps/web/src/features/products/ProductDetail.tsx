@@ -27,8 +27,13 @@ export function ProductDetail({ product }: { product: ProductResponse }) {
             <p className={styles.origin}>Origin · {product.origin}</p>
             <p className={styles.fullDescription}>{product.description}</p>
             {product.price !== null && <p className={styles.price}>Price: {product.price}</p>}
+            <p>
+              <Link className={styles.button} href={{ pathname: "/analysis", query: { product_id: product.id } }}>
+                Analyze market fit
+              </Link>
+            </p>
             {purchaseUrl && (
-              <a className={styles.button} href={purchaseUrl} target="_blank" rel="noopener noreferrer">
+              <a href={purchaseUrl} target="_blank" rel="noopener noreferrer">
                 Visit seller website ↗ <span className={styles.newTab}>(opens in a new tab)</span>
               </a>
             )}

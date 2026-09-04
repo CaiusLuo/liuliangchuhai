@@ -12,6 +12,7 @@ import {
 } from "@/api/selection"
 
 import ContentPlanSection from "./ContentPlanSection"
+import { resolveProductSelection } from "./product-selection"
 import styles from "./analysis.module.css"
 
 type CatalogState =
@@ -64,11 +65,12 @@ function AnalysisReport({ result }: { result: ProductAnalysisResponse }) {
   )
 }
 
-export default function AnalysisWorkbench() {
+export default function AnalysisWorkbench({ initialProductId = "" }: { initialProductId?: string }) {
   const [catalog, setCatalog] = useState<CatalogState>({ status: "loading" })
   const [catalogAttempt, setCatalogAttempt] = useState(0)
   const [analysis, setAnalysis] = useState<AnalysisState>({ status: "idle" })
-  const [productId, setProductId] = useState("")
+  // null means untouched; an explicit empty selection must override preselection.
+  const [selectedProductId, setProductId] = useState<string | null>(null)
   const [country, setCountry] = useState("")
   const [targetAudience, setTargetAudience] = useState("")
   const [marketNotes, setMarketNotes] = useState("")
@@ -92,13 +94,13 @@ export default function AnalysisWorkbench() {
   }, [catalogAttempt])
 
   const products = catalog.status === "ready" ? catalog.products : []
+  const productId = resolveProductSelection(products, initialProductId, selectedProductId)
   const catalogReady = catalog.status === "ready" && products.length > 0
   const submitting = analysis.status === "submitting"
   const canSubmit = catalogReady && Boolean(productId.trim() && country.trim()) && !submitting
 
   function retryCatalog() {
     setCatalog({ status: "loading" })
-    setProductId("")
     setAnalysis({ status: "idle" })
     setCatalogAttempt((attempt) => attempt + 1)
   }

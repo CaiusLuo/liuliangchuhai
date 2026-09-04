@@ -26,9 +26,11 @@ export function ProductCatalog({ products }: { products: ProductListResponse["it
                 <Link href={`/products/${encodeURIComponent(product.id)}`} className={styles.card}>
                   <ProductImage src={product.images[0]} name={product.name} />
                   <div className={styles.cardBody}>
-                    <p className={styles.category}>{product.category}</p>
+                    <div className={styles.tags}>
+                      <span className={styles.category}>{product.category}</span>
+                      <span className={styles.tagOrigin}>{product.origin}</span>
+                    </div>
                     <h2>{product.name}</h2>
-                    <p className={styles.origin}>{product.origin}</p>
                     <p className={styles.description}>{product.description}</p>
                     <div className={styles.cardFooter}>
                       {product.price !== null && <span>Price: {product.price}</span>}

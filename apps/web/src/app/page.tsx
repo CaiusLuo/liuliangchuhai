@@ -30,18 +30,7 @@ const outputs = [
 export default function Home() {
   return (
     <div className={styles.landing}>
-      <a className={styles.skipLink} href="#main-content">Skip to content</a>
-      <header className={styles.navigation}>
-        <Link href="/" className={styles.brand} aria-label="liuliangchuhai home">
-          <span className={styles.brandMark} aria-hidden="true">↗</span>
-          <span>liuliangchuhai<span className={styles.brandCaption}>LOCAL ROOTS. NEW HORIZONS.</span></span>
-        </Link>
-        <nav aria-label="Main navigation">
-          <Link className={styles.navProducts} href="/products">Products</Link>
-          <Link className={styles.navAction} href="/analysis">Start Analysis <span aria-hidden="true">↗</span></Link>
-        </nav>
-      </header>
-      <main id="main-content" className={styles.main}>
+      <main className={styles.main}>
         <section className={styles.hero} aria-labelledby="hero-title">
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}><span className={styles.dot} /> AI-ASSISTED MARKET STRATEGY · DEMO</p>
@@ -112,11 +101,6 @@ export default function Home() {
           <Link className={styles.primary} href="/analysis">Start Demo <span aria-hidden="true">↗</span></Link>
         </section>
       </main>
-      <footer className={styles.footer}>
-        <span>liuliangchuhai <span className={styles.footerChinese}>流量出海</span></span>
-        <span>Guangxi, China <span aria-hidden="true">→</span> ASEAN markets</span>
-        <span>An AI-assisted strategy demo</span>
-      </footer>
     </div>
   )
 }

@@ -147,7 +147,7 @@ export default function AnalysisWorkbench({ initialProductId = "" }: { initialPr
         <section className={styles.panel} aria-labelledby="analysis-form-title">
           <h2 id="analysis-form-title">Set the context</h2>
           <p className={styles.muted}>Product and country are required.</p>
-          {catalog.status === "loading" && <p role="status">Loading products…</p>}
+          {catalog.status === "loading" && <p className={styles.status} role="status">Loading products…</p>}
           {catalog.status === "error" && (
             <div>
               <p className={styles.error} role="alert">{catalog.message}</p>
@@ -156,7 +156,7 @@ export default function AnalysisWorkbench({ initialProductId = "" }: { initialPr
           )}
           {catalog.status === "ready" && !products.length && (
             <div>
-              <p role="status">No products are available.</p>
+              <p className={styles.status} role="status">No products are available.</p>
               <button className={styles.secondaryButton} onClick={retryCatalog}>Reload catalog</button>
             </div>
           )}

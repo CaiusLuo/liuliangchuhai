@@ -54,7 +54,7 @@ export function ProductDetail({ product }: { product: ProductResponse }) {
             <section className={styles.section}>
               <h2>Ingredients</h2>
               <ul className={styles.ingredients}>
-                {product.ingredients.map((ingredient, index) => <li key={`${index}-${ingredient}`}>{ingredient}</li>)}
+                {product.ingredients.map((ingredient, index) => <li key={`${index}-${ingredient}`} className={styles.ingredient}>{ingredient}</li>)}
               </ul>
             </section>
           )}

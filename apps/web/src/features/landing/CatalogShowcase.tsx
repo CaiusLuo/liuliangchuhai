@@ -71,7 +71,7 @@ export async function FeaturedProducts() {
             <span className={styles.cardNumber}>THE COLLECTION / 0{index + 1}</span>
           </div>
           <div className={styles.cardBody}>
-            <div className={styles.tags}><span>{product.category}</span><span>{product.origin}</span></div>
+            <div className={styles.tags}><span className={styles.tag}>{product.category}</span><span className={styles.tag}>{product.origin}</span></div>
             <h3>{product.name}</h3>
             <p className={styles.description}>{product.description}</p>
             <div className={styles.cardActions}>

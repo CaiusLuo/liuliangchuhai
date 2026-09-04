@@ -13,7 +13,7 @@ export default function ProductsError({ retry }: { retry: () => void }) {
         <p>Product information is temporarily unavailable. Please try again.</p>
         <div className={styles.actions}>
           <button className={styles.button} onClick={() => retry()}>Try again</button>
-          <Link href="/products">Back to catalog</Link>
+          <Link className={styles.secondaryButton} href="/products">Back to catalog</Link>
         </div>
       </div>
     </main>

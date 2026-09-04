@@ -1,0 +1,187 @@
+.page {
+  width: min(72rem, calc(100% - 2rem));
+  margin: 3rem auto;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  color-scheme: dark;
+}
+
+.header {
+  max-width: 48rem;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.15;
+}
+
+.header > p:last-child,
+.muted {
+  color: #b6c3d4;
+}
+
+.eyebrow {
+  color: #7dd3fc;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.panel {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid #334155;
+  border-radius: 0.75rem;
+  background: #152033;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.panel h3 {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 1rem;
+}
+
+.fields {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 1rem 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.fields label {
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+
+.fields label span {
+  color: #b6c3d4;
+  font-weight: 400;
+}
+
+.fields input,
+.fields select,
+.fields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem;
+  border: 1px solid #60728b;
+  border-radius: 0.4rem;
+  background: #101827;
+  color: #f4f7fb;
+  font: inherit;
+}
+
+.fields textarea {
+  resize: vertical;
+}
+
+.submitButton,
+.secondaryButton {
+  padding: 0.75rem 1rem;
+  border: 1px solid #7dd3fc;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.submitButton {
+  margin-top: 1rem;
+  background: #7dd3fc;
+  color: #101827;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: #7dd3fc;
+}
+
+.fields :disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page :focus-visible {
+  outline: 3px solid #7dd3fc;
+  outline-offset: 3px;
+}
+
+.status {
+  min-height: 1.5em;
+  margin-bottom: 0;
+  color: #7dd3fc;
+}
+
+.error {
+  padding: 0.75rem;
+  border-left: 3px solid #fda4af;
+  background: #381e30;
+  color: #fecdd3;
+}
+
+.recommendation {
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #7dd3fc;
+  border-radius: 0.4rem;
+  color: #7dd3fc;
+  font-weight: 700;
+}
+
+.score {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.sections {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sections section {
+  border-top: 1px solid #334155;
+}
+
+.report p {
+  white-space: pre-wrap;
+}
+
+.sections ul {
+  margin: 0.25rem 0;
+  padding-left: 1.25rem;
+}
+
+.sections li + li {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 720px) {
+  .page {
+    margin: 1.5rem auto;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+}

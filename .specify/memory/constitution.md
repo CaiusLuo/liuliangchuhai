@@ -82,6 +82,15 @@ boundary. Issue #5 implementation, product writes/admin, search/filter/paginatio
 auth, market pricing, and unrelated features remain out of scope. Existing Core
 Principles, core contracts, architecture gates, and testing rules are unchanged.
 
+The bounded frontend increment `specs/004-product-analysis-frontend/spec.md`
+(Issue #4) is authorized after SPEC and minimal RED review: an operator /analysis
+route consuming existing GET /products and POST /product-analysis through generated
+TypeScript contracts, with frontend loading/error/success UI. This exposes the
+existing analysis capability without changing backend public contracts. Issue #5,
+backend changes, new API contracts, provider integration, content generation and
+digital human work remain out of scope. Core Principles and earlier increments
+are unchanged. GREEN requires explicit approval after the current SPEC/PLAN/RED.
+
 ## Development Workflow and Quality Gate
 
 Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> verification. Before declaring work complete, run `make check` or, on Windows, `uv run python scripts/dev.py check`. The gate MUST check formatting without mutation, linting, type safety, architecture boundaries, unit/contract/integration/acceptance tests, frontend lint/typecheck, and generated OpenAPI/client drift.
@@ -90,4 +99,4 @@ Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> v
 
 This constitution supersedes informal conventions. Amendments require an explicit specification change, rationale, version update, and review of affected tests, architecture rules, generated contracts, and agent guidance. Reviewers MUST reject untested boundary changes, hidden contract changes, and unjustified complexity.
 
-**Version**: 1.4.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04
+**Version**: 1.5.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04

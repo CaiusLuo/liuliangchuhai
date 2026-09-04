@@ -2,10 +2,11 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/017-product-read-api/spec.md`.
-Issue #17 implementation is complete and awaiting PR/merge.
-Keep the frozen read-only Product HTTP contract unchanged.
-Do not start Issue #5 until Issue #17 is merged into main.
+Active spec: `specs/004-product-analysis-frontend/spec.md`.
+Issue #17 is merged; Issue #4 GREEN is authorized after SPEC + RED review under
+constitution 1.5.0. Implement only /analysis using existing product/analysis APIs
+and generated types. Keep backend contracts unchanged. Do not start Issue #5,
+add dependencies, commit, push, or create a PR.
 
 ## Architecture
 

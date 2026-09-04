@@ -11,6 +11,7 @@ import {
   type ProductListResponse,
 } from "@/api/selection"
 
+import ContentPlanSection from "./ContentPlanSection"
 import styles from "./analysis.module.css"
 
 type CatalogState =
@@ -21,7 +22,7 @@ type CatalogState =
 type AnalysisState =
   | { status: "idle" | "submitting" }
   | { status: "error"; message: string }
-  | { status: "success"; result: ProductAnalysisResponse }
+  | { status: "success"; result: ProductAnalysisResponse; request: ProductAnalysisRequest }
 
 const recommendationLabels: Record<ProductAnalysisResponse["recommendation"], string> = {
   strong_fit: "Strong fit",
@@ -121,7 +122,7 @@ export default function AnalysisWorkbench() {
     setAnalysis({ status: "submitting" })
     try {
       const result = await analyzeProduct(request)
-      setAnalysis({ status: "success", result })
+      setAnalysis({ status: "success", result, request })
     } catch (error) {
       setAnalysis({
         status: "error",
@@ -186,7 +187,12 @@ export default function AnalysisWorkbench() {
         </section>
         <section className={`${styles.panel} ${styles.report}`} aria-labelledby="analysis-result-title" aria-busy={submitting}>
           <h2 id="analysis-result-title">Analysis report</h2>
-          {analysis.status === "success" ? <AnalysisReport result={analysis.result} /> : (
+          {analysis.status === "success" ? (
+            <>
+              <AnalysisReport result={analysis.result} />
+              <ContentPlanSection request={{ ...analysis.request, analysis: analysis.result }} />
+            </>
+          ) : (
             <p className={styles.muted}>
               {submitting ? "Your report is being prepared." : "Submit a product and market to see the recommendation, strengths, risks and suggested directions."}
             </p>

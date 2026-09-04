@@ -1,15 +1,21 @@
 from dataclasses import dataclass
 from importlib.resources import as_file, files
 
+from liuliangchuhai.application.ports.content_planner import ContentPlannerPort
 from liuliangchuhai.application.ports.digital_human import DigitalHumanPort
 from liuliangchuhai.application.ports.llm import LLMPort
 from liuliangchuhai.application.ports.product_repository import ProductRepository
 from liuliangchuhai.application.use_cases.analyze_product import AnalyzeProductUseCase
 from liuliangchuhai.application.use_cases.analyze_product_by_id import AnalyzeProductByIdUseCase
+from liuliangchuhai.application.use_cases.create_content_plan import CreateContentPlanUseCase
+from liuliangchuhai.application.use_cases.create_content_plan_by_id import (
+    CreateContentPlanByIdUseCase,
+)
 from liuliangchuhai.application.use_cases.get_product import GetProduct
 from liuliangchuhai.application.use_cases.get_system_status import GetSystemStatus
 from liuliangchuhai.application.use_cases.list_products import ListProducts
 from liuliangchuhai.bootstrap.settings import Settings
+from liuliangchuhai.infrastructure.content.mock import MockContentPlannerAdapter
 from liuliangchuhai.infrastructure.digital_human.mock import MockDigitalHumanAdapter
 from liuliangchuhai.infrastructure.llm.mock import MockLLMAdapter
 from liuliangchuhai.infrastructure.products.json_repository import JsonProductRepository
@@ -18,6 +24,9 @@ from liuliangchuhai.infrastructure.products.json_repository import JsonProductRe
 @dataclass(frozen=True, slots=True)
 class Container:
     llm: LLMPort
+    content_planner: ContentPlannerPort
+    create_content_plan: CreateContentPlanUseCase
+    create_content_plan_by_id: CreateContentPlanByIdUseCase
     digital_human: DigitalHumanPort
     get_system_status: GetSystemStatus
     product_repository: ProductRepository
@@ -47,7 +56,12 @@ def build_container(settings: Settings) -> Container:
         product_repository = JsonProductRepository(path)
     get_product = GetProduct(product_repository)
     analyze_product = AnalyzeProductUseCase(llm)
+    content_planner = MockContentPlannerAdapter()
+    create_content_plan = CreateContentPlanUseCase(content_planner)
     return Container(
+        content_planner=content_planner,
+        create_content_plan=create_content_plan,
+        create_content_plan_by_id=CreateContentPlanByIdUseCase(get_product, create_content_plan),
         llm=llm,
         digital_human=digital_human,
         get_system_status=GetSystemStatus(llm=llm, digital_human=digital_human),

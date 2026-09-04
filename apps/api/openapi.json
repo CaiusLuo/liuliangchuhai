@@ -104,6 +104,22 @@
         "title": "ProductAnalysisRequest",
         "type": "object"
       },
+      "ProductListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProductResponse"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "ProductListResponse",
+        "type": "object"
+      },
       "ProductMarketAnalysisResponse": {
         "properties": {
           "content_directions": {
@@ -189,6 +205,109 @@
           "content_directions"
         ],
         "title": "ProductMarketAnalysisResponse",
+        "type": "object"
+      },
+      "ProductNotFoundResponse": {
+        "properties": {
+          "code": {
+            "const": "product_not_found",
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "const": "Product not found",
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ProductNotFoundResponse",
+        "type": "object"
+      },
+      "ProductResponse": {
+        "properties": {
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "cultural_background": {
+            "title": "Cultural Background",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "images": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Images",
+            "type": "array"
+          },
+          "ingredients": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Ingredients",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "origin": {
+            "title": "Origin",
+            "type": "string"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "purchase_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purchase Url"
+          },
+          "usage": {
+            "title": "Usage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "category",
+          "description",
+          "origin",
+          "cultural_background",
+          "images",
+          "usage",
+          "ingredients",
+          "price",
+          "purchase_url"
+        ],
+        "title": "ProductResponse",
         "type": "object"
       },
       "ProviderStatusResponse": {
@@ -367,6 +486,73 @@
           }
         },
         "summary": "Analyze Product"
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "list_products",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductListResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Catalog"
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "operationId": "get_product",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_id",
+            "required": true,
+            "schema": {
+              "title": "Product Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductNotFoundResponse"
+                }
+              }
+            },
+            "description": "Product not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Catalog Product"
       }
     }
   }

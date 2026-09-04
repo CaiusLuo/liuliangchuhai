@@ -50,3 +50,26 @@ class ProductMarketAnalysisResponse(BaseModel):
 class ProductAnalysisErrorResponse(BaseModel):
     code: Literal["product_not_found", "llm_unavailable", "invalid_llm_response"]
     message: str
+
+
+class ProductResponse(BaseModel):
+    id: str
+    name: str
+    category: str
+    description: str
+    origin: str
+    cultural_background: str
+    images: list[str]
+    usage: str
+    ingredients: list[str]
+    price: str | None
+    purchase_url: str | None
+
+
+class ProductListResponse(BaseModel):
+    items: list[ProductResponse]
+
+
+class ProductNotFoundResponse(BaseModel):
+    code: Literal["product_not_found"]
+    message: Literal["Product not found"]

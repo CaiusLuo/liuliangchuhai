@@ -73,6 +73,15 @@ This makes the existing mock analysis available over HTTP; frontend features,
 real providers, Issue #4, and other deferred capabilities remain out of scope.
 Existing core contracts, architecture gates, and testing rules are unchanged.
 
+The reviewed Phase 1 increment, `specs/017-product-read-api/spec.md` (Issue #17),
+is authorized for implementation: expose the existing read-only Product catalog
+through GET /products and GET /products/{product_id}, with explicit Presentation
+product schemas/mappers, bootstrap registration, and OpenAPI-to-generated-TypeScript
+contracts. This lets callers consume the existing catalog through a stable HTTP
+boundary. Issue #5 implementation, product writes/admin, search/filter/pagination,
+auth, market pricing, and unrelated features remain out of scope. Existing Core
+Principles, core contracts, architecture gates, and testing rules are unchanged.
+
 ## Development Workflow and Quality Gate
 
 Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> verification. Before declaring work complete, run `make check` or, on Windows, `uv run python scripts/dev.py check`. The gate MUST check formatting without mutation, linting, type safety, architecture boundaries, unit/contract/integration/acceptance tests, frontend lint/typecheck, and generated OpenAPI/client drift.
@@ -81,4 +90,4 @@ Work MUST follow specification -> plan -> tasks -> RED -> GREEN -> REFACTOR -> v
 
 This constitution supersedes informal conventions. Amendments require an explicit specification change, rationale, version update, and review of affected tests, architecture rules, generated contracts, and agent guidance. Reviewers MUST reject untested boundary changes, hidden contract changes, and unjustified complexity.
 
-**Version**: 1.3.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04
+**Version**: 1.4.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04

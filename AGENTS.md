@@ -2,9 +2,10 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/003-product-analysis-api/spec.md`. Issue #3 GREEN is authorized
-under constitution 1.3.0; implement only the frozen product-analysis HTTP increment
-and regenerate its OpenAPI/client artifacts. Do not start Issue #4.
+Active spec: `specs/017-product-read-api/spec.md`.
+Issue #17 implementation is complete and awaiting PR/merge.
+Keep the frozen read-only Product HTTP contract unchanged.
+Do not start Issue #5 until Issue #17 is merged into main.
 
 ## Architecture
 

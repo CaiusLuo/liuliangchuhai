@@ -1,5 +1,6 @@
 from collections.abc import Iterator, Sequence
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 import pytest
 from fastapi import FastAPI
@@ -61,11 +62,17 @@ def analysis_use_case(product_analysis_result: ProductMarketAnalysis) -> FakeAna
 def analysis_app(
     monkeypatch: pytest.MonkeyPatch, analysis_use_case: FakeAnalyzeProductById
 ) -> FastAPI:
-    # Deliberately expose only the orchestrator and existing health use case.
-    # The HTTP layer cannot compose lookup and analysis through this container.
+    # Supply app-level read dependencies, but fail if analysis invokes them.
+    # No repository or lower-level analysis use case is exposed.
     container = SimpleNamespace(
         get_system_status=FakeGetSystemStatus(),
         analyze_product_by_id=analysis_use_case,
+        list_products=SimpleNamespace(
+            execute=AsyncMock(side_effect=AssertionError("Analysis must not list products"))
+        ),
+        get_product=SimpleNamespace(
+            execute=AsyncMock(side_effect=AssertionError("Analysis must use its orchestrator"))
+        ),
     )
     monkeypatch.setattr("liuliangchuhai.bootstrap.app.build_container", lambda settings: container)
     return create_app(Settings(_env_file=None))

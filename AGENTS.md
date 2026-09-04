@@ -2,10 +2,10 @@
 
 Read `.specify/memory/constitution.md` and the active spec before changing code.
 
-Active spec: `specs/017-product-read-api/spec.md`. Issue #17 GREEN is authorized
-under constitution 1.4.0 after SPEC + RED review. Implement only the frozen
-read-only product HTTP increment and regenerate OpenAPI/TypeScript contracts.
-Do not start Issue #5, commit, push, or create a PR.
+Active spec: `specs/017-product-read-api/spec.md`.
+Issue #17 implementation is complete and awaiting PR/merge.
+Keep the frozen read-only Product HTTP contract unchanged.
+Do not start Issue #5 until Issue #17 is merged into main.
 
 ## Architecture
 

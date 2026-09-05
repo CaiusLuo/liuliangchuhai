@@ -208,3 +208,76 @@ async def test_normal_app_demo_flow_is_repeatable(content_request: dict) -> None
     assert first.status_code == second.status_code == 200
     assert first.json() == second.json()
     assert all(first.json().values())
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("outcome", ["success", "invalid", "unavailable"])
+async def test_deepseek_content_preserves_http_contract_and_does_not_reanalyze(
+    monkeypatch, content_request, outcome
+):
+    import json
+    from pathlib import Path
+
+    from httpx import MockTransport, Response
+    from liuliangchuhai.infrastructure.content.deepseek import DeepSeekContentPlannerAdapter
+
+    requests = []
+    expected = json.loads(
+        (Path(__file__).parents[1] / "fixtures/content_plans/mango_indonesia.json").read_text()
+    )
+
+    def handler(request):
+        requests.append(request)
+        if outcome == "unavailable":
+            return Response(503, text="private provider diagnostic")
+        data = expected if outcome == "success" else {**expected, "live_script": "Demo placeholder"}
+        return Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "finish_reason": "stop",
+                        "message": {"content": json.dumps(data)},
+                    }
+                ]
+            },
+        )
+
+    # Exercise actual bootstrap selection; replace only its external HTTP transport.
+    build_planner = DeepSeekContentPlannerAdapter
+    monkeypatch.setattr(
+        "liuliangchuhai.bootstrap.container.DeepSeekContentPlannerAdapter",
+        lambda **kwargs: build_planner(**kwargs, transport=MockTransport(handler)),
+    )
+    container = build_container(
+        Settings(_env_file=None, llm_provider="deepseek", deepseek_api_key="test-key")
+    )
+    analysis = AsyncMock(side_effect=AssertionError("Must reuse the supplied analysis"))
+    monkeypatch.setattr(container.llm, "analyze_product_market", analysis)
+    monkeypatch.setattr("liuliangchuhai.bootstrap.app.build_container", lambda settings: container)
+    app = create_app(Settings(_env_file=None))
+    request = {
+        **content_request,
+        "product_id": "baise-mango",
+        "country": "Indonesia",
+        "target_language": "English",
+    }
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        response = await client.post("/content-plan", json=request)
+    analysis.assert_not_called()
+    assert len(requests) == 1
+    supplied = json.loads(
+        json.loads(requests[0].content)["messages"][1]["content"].split("Context JSON:\n", 1)[1]
+    )
+    canonical = await container.get_product.execute("baise-mango")
+    assert supplied["product"]["name"] == canonical.name
+    assert supplied["product"]["cultural_background"] == canonical.cultural_background
+    if outcome == "success":
+        assert response.status_code == 200
+        assert response.json() == expected
+    else:
+        assert response.status_code == 500
+        assert response.json() == {
+            "code": "content_planning_failed",
+            "message": "Unable to create content plan. Please try again.",
+        }

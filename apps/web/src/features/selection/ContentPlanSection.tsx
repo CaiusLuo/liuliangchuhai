@@ -57,7 +57,7 @@ export default function ContentPlanSection({
     <section className={styles.contentPlan} aria-labelledby="content-plan-title" aria-busy={generating}>
       <h2 id="content-plan-title">Content plan</h2>
       <p className={styles.muted}>
-        Create demo planning materials from this analysis. These are mock examples, not generated media or translations.
+        Prepare marketing copy and creative prompts from this analysis. No images or videos are generated; review product claims and local suitability before use.
       </p>
       <form onSubmit={submit}>
         <fieldset className={styles.fields} disabled={generating}>

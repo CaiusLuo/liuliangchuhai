@@ -5,8 +5,10 @@ exploring ASEAN markets. Browse three demo products—Liuzhou luosifen, Wuzhou
 Liubao tea, and Guilin monk fruit—then turn a market-fit analysis into a content
 plan. Built with FastAPI and Next.js.
 
-The default demo runs without API keys. DeepSeek can provide real market analysis;
-content plans remain deterministic mock examples, not generated media or translations.
+The default demo runs without API keys. DeepSeek can provide real market analysis
+and localized content plans. Content plans are marketing copy and creative prompts,
+not generated images or videos. The key-free mode keeps deterministic, explicitly
+labeled mock examples.
 Scores and AI claims are planning suggestions that need independent validation.
 
 ## Quick start
@@ -50,9 +52,16 @@ LIULIANGCHUHAI_DEEPSEEK_TIMEOUT_SECONDS=20
 
 Use your own DeepSeek API key, then restart `make dev` (or the Python equivalent).
 Check `/health`: `providers.llm.provider` should be `deepseek` and `available`
-should be `true`. Follow the demo flow below to run a real analysis; health alone
-only checks provider availability. If a request times out, you can increase the
-local timeout and restart.
+should be `true`. This selector enables DeepSeek for both market analysis and Content
+Plan, using the same key, model and timeout. Follow the demo flow to run both; health
+alone only checks provider availability. Content Plan uses the canonical product,
+market/language and the existing analysis's audience, risks and recommendation in one
+bounded request, without rerunning analysis or falling back to mock on failure.
+
+Its instructions coordinate the six fields around a localized strategy. Invalid JSON,
+placeholders, too-short sections and basic English language-check failures use the existing
+content-plan error. These checks do not prove factual accuracy or marketing effectiveness;
+review the assets before use. If a request times out, increase the local timeout and restart.
 
 Switch `LIULIANGCHUHAI_LLM_PROVIDER` back to `mock` and restart for the key-free demo.
 Ordinary development and `make check` need no external credentials. Never commit
@@ -116,7 +125,8 @@ the analysis request completed successfully. Output varies between runs.
 
 ### Content plan result
 
-The existing mock content planner completes the flow after the real analysis.
+This earlier screenshot shows the key-free mock content planner. With DeepSeek
+selected, the same six sections now contain localized marketing assets.
 
 ![Completed content plan with all six planning fields](.github/screenshots/readme/content-plan.jpg)
 

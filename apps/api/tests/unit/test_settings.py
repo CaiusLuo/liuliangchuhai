@@ -1,4 +1,6 @@
+import pytest
 from liuliangchuhai.bootstrap.settings import Settings
+from pydantic import ValidationError
 
 
 def test_provider_defaults_are_mock() -> None:
@@ -6,6 +8,28 @@ def test_provider_defaults_are_mock() -> None:
 
     assert settings.llm_provider == "mock"
     assert settings.digital_human_provider == "mock"
+    assert settings.deepseek_model == "deepseek-v4-flash"
+    assert settings.deepseek_timeout_seconds == 20
+
+
+def test_deepseek_configuration_works() -> None:
+    settings = Settings(
+        _env_file=None,
+        llm_provider="deepseek",
+        deepseek_api_key="secret",
+        deepseek_model="deepseek-test",
+        deepseek_timeout_seconds=7,
+    )
+
+    assert settings.deepseek_api_key is not None
+    assert settings.deepseek_api_key.get_secret_value() == "secret"
+    assert settings.deepseek_model == "deepseek-test"
+    assert settings.deepseek_timeout_seconds == 7
+
+
+def test_selected_deepseek_requires_api_key() -> None:
+    with pytest.raises(ValidationError, match="DEEPSEEK_API_KEY"):
+        Settings(_env_file=None, llm_provider="deepseek")
 
 
 def test_provider_settings_use_project_prefix(monkeypatch) -> None:

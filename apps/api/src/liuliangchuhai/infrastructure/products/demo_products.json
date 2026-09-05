@@ -37,5 +37,57 @@
     "ingredients": ["罗汉果"],
     "price": null,
     "purchase_url": null
+  },
+  {
+    "id": "baise-mango",
+    "name": "百色芒果",
+    "category": "水果",
+    "description": "用于展示百色地方水果的芒果演示商品，不对应具体品种、等级或包装规格。",
+    "origin": "广西百色",
+    "cultural_background": "百色位于广西西部，当地气候适宜芒果种植，芒果是该地区常见的地方水果之一。",
+    "images": [],
+    "usage": "按实际产品说明判断成熟度后鲜食，或用于制作饮品与甜品。",
+    "ingredients": ["芒果"],
+    "price": null,
+    "purchase_url": null
+  },
+  {
+    "id": "hengzhou-jasmine-tea",
+    "name": "横州茉莉花茶",
+    "category": "花茶",
+    "description": "以茉莉花与茶叶窨制工艺呈现的花茶演示商品，不代表具体品牌、批次或等级。",
+    "origin": "广西横州",
+    "cultural_background": "横州种植茉莉花的历史较长，当地将茉莉花与茶叶结合的窨制做法是广西花茶的地方特色之一。",
+    "images": [],
+    "usage": "取适量茶叶冲泡饮用，投茶量与水温按个人口味及实际产品说明调整。",
+    "ingredients": ["茶叶", "茉莉花"],
+    "price": null,
+    "purchase_url": null
+  },
+  {
+    "id": "beihai-salted-duck-egg",
+    "name": "北海海鸭蛋",
+    "category": "腌制食品",
+    "description": "用于展示北海沿海饮食的腌制鸭蛋演示商品，不对应具体品牌、腌制配方或包装规格。",
+    "origin": "广西北海",
+    "cultural_background": "北海地处北部湾沿海，滩涂放养与腌制加工是当地饮食中较为常见的处理方式。",
+    "images": [],
+    "usage": "按实际产品说明蒸煮后食用，或作为佐餐配菜。",
+    "ingredients": ["鸭蛋", "食盐"],
+    "price": null,
+    "purchase_url": null
+  },
+  {
+    "id": "qinzhou-nixing-pottery",
+    "name": "钦州坭兴陶",
+    "category": "手工艺品",
+    "description": "用于展示钦州传统制陶工艺的陶器演示商品，不对应具体器型、窑口或作者。",
+    "origin": "广西钦州",
+    "cultural_background": "坭兴陶取材于钦州当地陶土，烧制过程中形成的窑变色泽是这一工艺的地方特征。",
+    "images": [],
+    "usage": "可作为茶器或陈设器使用，具体养护方式以实际产品说明为准。",
+    "ingredients": ["陶土"],
+    "price": null,
+    "purchase_url": null
   }
 ]

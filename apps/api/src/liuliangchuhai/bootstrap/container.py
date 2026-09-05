@@ -18,6 +18,7 @@ from liuliangchuhai.application.use_cases.get_system_status import GetSystemStat
 from liuliangchuhai.application.use_cases.list_products import ListProducts
 from liuliangchuhai.application.use_cases.reply_to_customer import ReplyToCustomer
 from liuliangchuhai.bootstrap.settings import Settings
+from liuliangchuhai.infrastructure.assistant.deepseek import DeepSeekAssistantAdapter
 from liuliangchuhai.infrastructure.assistant.mock import MockAssistantAdapter
 from liuliangchuhai.infrastructure.content.mock import MockContentPlannerAdapter
 from liuliangchuhai.infrastructure.digital_human.mock import MockDigitalHumanAdapter
@@ -57,6 +58,19 @@ def _build_llm(settings: Settings) -> LLMPort:
     raise ValueError(f"Unsupported LLM provider: {settings.llm_provider!r}")
 
 
+def _build_assistant(settings: Settings) -> AssistantPort:
+    if settings.assistant_provider == "mock":
+        return MockAssistantAdapter()
+    if settings.assistant_provider == "deepseek":
+        assert settings.deepseek_api_key is not None
+        return DeepSeekAssistantAdapter(
+            api_key=settings.deepseek_api_key.get_secret_value(),
+            model=settings.deepseek_model,
+            timeout_seconds=settings.deepseek_timeout_seconds,
+        )
+    raise ValueError(f"Unsupported assistant provider: {settings.assistant_provider!r}")
+
+
 def _build_digital_human(provider: str) -> DigitalHumanPort:
     if provider == "mock":
         return MockDigitalHumanAdapter()
@@ -73,7 +87,7 @@ def build_container(settings: Settings) -> Container:
     analyze_product = AnalyzeProductUseCase(llm)
     content_planner = MockContentPlannerAdapter()
     create_content_plan = CreateContentPlanUseCase(content_planner)
-    assistant = MockAssistantAdapter()
+    assistant = _build_assistant(settings)
     return Container(
         assistant=assistant,
         reply_to_customer=ReplyToCustomer(get_product, assistant),

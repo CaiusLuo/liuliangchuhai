@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     )
 
     llm_provider: str = "mock"
+    assistant_provider: str = "mock"
     deepseek_api_key: SecretStr | None = None
     deepseek_model: str = "deepseek-v4-flash"
     deepseek_timeout_seconds: float = Field(default=20, gt=0)
@@ -20,10 +21,11 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def require_selected_provider_credentials(self) -> Self:
-        if self.llm_provider == "deepseek" and (
+        if "deepseek" in (self.llm_provider, self.assistant_provider) and (
             self.deepseek_api_key is None or not self.deepseek_api_key.get_secret_value().strip()
         ):
             raise ValueError(
-                "LIULIANGCHUHAI_DEEPSEEK_API_KEY is required when the LLM provider is deepseek"
+                "LIULIANGCHUHAI_DEEPSEEK_API_KEY is required when the LLM or assistant "
+                "provider is deepseek"
             )
         return self

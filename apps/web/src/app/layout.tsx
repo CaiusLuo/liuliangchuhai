@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import type { ReactNode } from "react"
 
+import { AssistantProvider } from "@/features/assistant/AssistantProvider"
+
 import "./styles.css"
 import ui from "./ui.module.css"
 
@@ -25,7 +27,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
             <Link className={ui.navAction} href="/analysis">Start Analysis <span aria-hidden="true">↗</span></Link>
           </nav>
         </header>
-        <div id="main-content" className={ui.content} tabIndex={-1}>{children}</div>
+        <AssistantProvider>
+          <div id="main-content" className={ui.content} tabIndex={-1}>{children}</div>
+        </AssistantProvider>
         <footer className={ui.footer}>
           <span>liuliangchuhai <span className={ui.footerChinese}>流量出海</span></span>
           <span>Guangxi, China <span aria-hidden="true">→</span> ASEAN markets</span>

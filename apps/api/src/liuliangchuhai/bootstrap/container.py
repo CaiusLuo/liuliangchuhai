@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from importlib.resources import as_file, files
 
+from liuliangchuhai.application.ports.assistant import AssistantPort
 from liuliangchuhai.application.ports.content_planner import ContentPlannerPort
 from liuliangchuhai.application.ports.digital_human import DigitalHumanPort
 from liuliangchuhai.application.ports.llm import LLMPort
@@ -15,7 +16,9 @@ from liuliangchuhai.application.use_cases.generate_digital_human import Generate
 from liuliangchuhai.application.use_cases.get_product import GetProduct
 from liuliangchuhai.application.use_cases.get_system_status import GetSystemStatus
 from liuliangchuhai.application.use_cases.list_products import ListProducts
+from liuliangchuhai.application.use_cases.reply_to_customer import ReplyToCustomer
 from liuliangchuhai.bootstrap.settings import Settings
+from liuliangchuhai.infrastructure.assistant.mock import MockAssistantAdapter
 from liuliangchuhai.infrastructure.content.mock import MockContentPlannerAdapter
 from liuliangchuhai.infrastructure.digital_human.mock import MockDigitalHumanAdapter
 from liuliangchuhai.infrastructure.llm.deepseek import DeepSeekLLMAdapter
@@ -25,6 +28,8 @@ from liuliangchuhai.infrastructure.products.json_repository import JsonProductRe
 
 @dataclass(frozen=True, slots=True)
 class Container:
+    assistant: AssistantPort
+    reply_to_customer: ReplyToCustomer
     llm: LLMPort
     content_planner: ContentPlannerPort
     create_content_plan: CreateContentPlanUseCase
@@ -68,7 +73,10 @@ def build_container(settings: Settings) -> Container:
     analyze_product = AnalyzeProductUseCase(llm)
     content_planner = MockContentPlannerAdapter()
     create_content_plan = CreateContentPlanUseCase(content_planner)
+    assistant = MockAssistantAdapter()
     return Container(
+        assistant=assistant,
+        reply_to_customer=ReplyToCustomer(get_product, assistant),
         content_planner=content_planner,
         create_content_plan=create_content_plan,
         create_content_plan_by_id=CreateContentPlanByIdUseCase(get_product, create_content_plan),

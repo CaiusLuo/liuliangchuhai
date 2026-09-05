@@ -5,6 +5,23 @@
  */
 
 export interface paths {
+    "/assistant/chat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Assistant Chat */
+        post: operations["reply_to_customer"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/content-plan": {
         parameters: {
             query?: never;
@@ -94,6 +111,40 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /**
+         * AssistantActionType
+         * @enum {string}
+         */
+        AssistantActionType: "view_product" | "start_analysis";
+        /** AssistantChatRequest */
+        AssistantChatRequest: {
+            /** Message */
+            message: string;
+            /** Product Id */
+            product_id?: string | null;
+        };
+        /** AssistantChatResponse */
+        AssistantChatResponse: {
+            /** Message */
+            message: string;
+            suggested_action: components["schemas"]["AssistantSuggestedActionResponse"] | null;
+        };
+        /** AssistantErrorResponse */
+        AssistantErrorResponse: {
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "assistant_unavailable" | "invalid_assistant_response";
+            /** Message */
+            message: string;
+        };
+        /** AssistantSuggestedActionResponse */
+        AssistantSuggestedActionResponse: {
+            /** Product Id */
+            product_id: string;
+            type: components["schemas"]["AssistantActionType"];
+        };
         /** ContentPlanAnalysis */
         ContentPlanAnalysis: {
             /** Content Directions */
@@ -299,6 +350,66 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    reply_to_customer: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssistantChatRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssistantChatResponse"];
+                };
+            };
+            /** @description Product not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductNotFoundResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Assistant service returned an invalid response */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssistantErrorResponse"];
+                };
+            };
+            /** @description Assistant service is temporarily unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssistantErrorResponse"];
+                };
+            };
+        };
+    };
     create_content_plan: {
         parameters: {
             query?: never;

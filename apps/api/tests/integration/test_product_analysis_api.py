@@ -66,6 +66,9 @@ def analysis_app(
     # No repository or lower-level analysis use case is exposed.
     container = SimpleNamespace(
         get_system_status=FakeGetSystemStatus(),
+        reply_to_customer=SimpleNamespace(
+            execute=AsyncMock(side_effect=AssertionError("Analysis must not invoke assistant"))
+        ),
         analyze_product_by_id=analysis_use_case,
         create_content_plan_by_id=SimpleNamespace(execute=AsyncMock()),
         list_products=SimpleNamespace(

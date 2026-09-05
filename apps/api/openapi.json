@@ -1,6 +1,108 @@
 {
   "components": {
     "schemas": {
+      "AssistantActionType": {
+        "enum": [
+          "view_product",
+          "start_analysis"
+        ],
+        "title": "AssistantActionType",
+        "type": "string"
+      },
+      "AssistantChatRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Message",
+            "type": "string"
+          },
+          "product_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "AssistantChatRequest",
+        "type": "object"
+      },
+      "AssistantChatResponse": {
+        "properties": {
+          "message": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Message",
+            "type": "string"
+          },
+          "suggested_action": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssistantSuggestedActionResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "message",
+          "suggested_action"
+        ],
+        "title": "AssistantChatResponse",
+        "type": "object"
+      },
+      "AssistantErrorResponse": {
+        "properties": {
+          "code": {
+            "enum": [
+              "assistant_unavailable",
+              "invalid_assistant_response"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "AssistantErrorResponse",
+        "type": "object"
+      },
+      "AssistantSuggestedActionResponse": {
+        "properties": {
+          "product_id": {
+            "title": "Product Id",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AssistantActionType"
+          }
+        },
+        "required": [
+          "type",
+          "product_id"
+        ],
+        "title": "AssistantSuggestedActionResponse",
+        "type": "object"
+      },
       "ContentPlanAnalysis": {
         "additionalProperties": false,
         "properties": {
@@ -624,6 +726,74 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/assistant/chat": {
+      "post": {
+        "operationId": "reply_to_customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantChatResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductNotFoundResponse"
+                }
+              }
+            },
+            "description": "Product not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantErrorResponse"
+                }
+              }
+            },
+            "description": "Assistant service returned an invalid response"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantErrorResponse"
+                }
+              }
+            },
+            "description": "Assistant service is temporarily unavailable"
+          }
+        },
+        "summary": "Assistant Chat"
+      }
+    },
     "/content-plan": {
       "post": {
         "operationId": "create_content_plan",

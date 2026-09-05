@@ -25,6 +25,9 @@ type AnalysisState =
   | { status: "error"; message: string }
   | { status: "success"; result: ProductAnalysisResponse; request: ProductAnalysisRequest }
 
+// Fixed ASEAN shortcuts for the demo; typing any other country stays supported.
+const marketPresets = ["Vietnam", "Thailand", "Malaysia", "Indonesia"] as const
+
 const recommendationLabels: Record<ProductAnalysisResponse["recommendation"], string> = {
   strong_fit: "Strong fit",
   fit: "Fit",
@@ -173,6 +176,23 @@ export default function AnalysisWorkbench({ initialProductId = "" }: { initialPr
               </select>
               <label htmlFor="analysis-country">Country</label>
               <input id="analysis-country" value={country} onChange={(e) => setCountry(e.target.value)} required />
+              <div className={styles.presets} role="group" aria-label="ASEAN market shortcuts">
+                {marketPresets.map((preset) => (
+                  <button
+                    key={preset}
+                    className={styles.presetButton}
+                    type="button"
+                    aria-pressed={country.trim() === preset}
+                    onClick={() => {
+                      setCountry(preset)
+                      // A button click raises no change event, so mirror the form reset.
+                      if (!inFlight.current) setAnalysis({ status: "idle" })
+                    }}
+                  >
+                    {preset}
+                  </button>
+                ))}
+              </div>
               <label htmlFor="analysis-audience">Target audience <span>(optional)</span></label>
               <input id="analysis-audience" value={targetAudience} onChange={(e) => setTargetAudience(e.target.value)} />
               <label htmlFor="analysis-notes">Market notes <span>(optional)</span></label>

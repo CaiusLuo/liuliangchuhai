@@ -24,6 +24,9 @@
   font-size: 16px;
 }
 .fields textarea { resize: vertical; }
+.presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.presetButton { composes: secondary from "../../app/ui.module.css"; min-height: 36px; padding: 6px 12px; font-size: 12px; }
+.presetButton[aria-pressed="true"] { border-color: var(--ink); background: var(--surface-muted); }
 .submitButton { composes: primary from "../../app/ui.module.css"; margin-top: 16px; }
 .secondaryButton { composes: secondary from "../../app/ui.module.css"; margin-top: 12px; }
 .fields:disabled .submitButton:disabled { opacity: 1; }

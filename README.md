@@ -58,6 +58,14 @@ Switch `LIULIANGCHUHAI_LLM_PROVIDER` back to `mock` and restart for the key-free
 Ordinary development and `make check` need no external credentials. Never commit
 `.env` files or API keys; keep the key in backend configuration only.
 
+The product assistant has an independent selector: set
+`LIULIANGCHUHAI_ASSISTANT_PROVIDER=deepseek` in the same backend `.env` to enable
+natural replies at `POST /assistant/chat`. It reuses the DeepSeek key, model, and
+timeout above; either DeepSeek capability requires the key. The assistant defaults
+to `mock`, independently of market analysis. Each reply uses one bounded provider
+request, with no retries or silent mock fallback. Product context remains canonical
+and optional; requests contain only the current message and optional `product_id`.
+
 ## Demo flow
 
 1. Open `/` and choose **Explore Products**.

@@ -1,0 +1,45 @@
+.widget { position: fixed; right: 24px; bottom: max(20px, env(safe-area-inset-bottom)); z-index: 30; color: var(--ink); }
+.launcher { composes: primary from "../../app/ui.module.css"; width: 64px; height: 56px; padding: 10px; gap: 5px; box-shadow: 0 5px 18px #263c3020; }
+.panel { position: absolute; bottom: 72px; right: 0; display: flex; flex-direction: column; width: 384px; height: min(568px, calc(100dvh - 116px)); border: 1px solid var(--line); border-radius: var(--card-radius); background: var(--surface); box-shadow: 0 9px 32px #263c301a; overflow: hidden; }
+.panel[hidden] { display: none; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 20px 14px; background: var(--surface-muted); }
+.eyebrow { composes: eyebrow from "../../app/ui.module.css"; font-size: 9px; letter-spacing: 1.3px; margin-bottom: 7px; }
+.header h2 { font-size: 21px; letter-spacing: 1px; }
+.subtitle { color: var(--muted); font-size: 12px; margin-top: 6px; }
+.close { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; margin: -8px -10px 0 0; background: transparent; color: var(--ink); border: 0; border-radius: var(--control-radius); cursor: pointer; font-size: 26px; }
+.close:hover { background: #dce1d1; }
+.scope { padding: 10px 20px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.context { padding: 8px 20px; background: var(--paper); border-bottom: 1px solid var(--line); font-size: 12px; overflow-wrap: anywhere; }
+.conversation { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 20px; overflow-wrap: anywhere; }
+.empty { padding-top: 8px; }
+.welcomeMark { display: grid; place-items: center; width: 36px; height: 40px; margin-bottom: 16px; border: 1px solid var(--accent); border-radius: 20px 20px 3px 3px; color: var(--accent); font-family: "Songti SC", Georgia, serif; font-size: 23px; }
+.empty h3 { font-size: 17px; }
+.empty > p { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.prompts { display: grid; gap: 8px; margin-top: 20px; }
+.prompts button { display: flex; justify-content: space-between; gap: 12px; text-align: left; padding: 10px 12px; min-height: 44px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--control-radius); color: var(--ink); cursor: pointer; font-size: 12px; }
+.prompts button:hover { background: var(--surface-muted); border-color: #b8bfaf; }
+.messages { display: grid; gap: 18px; }
+.userMessage, .assistantMessage { min-width: 0; padding: 12px 14px; border-radius: var(--card-radius); }
+.userMessage { margin-left: 32px; background: var(--surface-muted); }
+.assistantMessage { margin-right: 12px; background: var(--paper); border: 1px solid var(--line); }
+.role { display: block; font-size: 10px; color: var(--accent); margin-bottom: 6px; }
+.messages p { font-size: 13px; line-height: 1.85; white-space: pre-wrap; }
+.action { composes: secondary from "../../app/ui.module.css"; min-height: 44px; padding: 8px 12px; margin-top: 12px; font-size: 12px; }
+.thinking { color: var(--accent); font-size: 12px; padding-top: 14px; }
+.error { composes: error from "../../app/ui.module.css"; font-size: 12px; }
+.retry { composes: secondary from "../../app/ui.module.css"; min-height: 44px; padding: 6px 12px; margin-top: 8px; }
+.composer { padding: 12px 16px 16px; border-top: 1px solid var(--line); background: var(--surface); }
+.composer label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 7px; }
+.inputRow { display: flex; gap: 8px; }
+.inputRow input { min-width: 0; flex: 1; width: 100%; min-height: 48px; padding: 10px; border: 1px solid #b8bfaf; border-radius: var(--control-radius); color: var(--ink); background: #fffffb; font-size: 16px; }
+.inputRow input::placeholder { font-size: 12px; }
+.send { composes: primary from "../../app/ui.module.css"; flex-shrink: 0; padding: 10px 14px; }
+
+@media (max-width: 760px) {
+  .widget { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+  .launcher { width: 56px; height: 52px; }
+  .panel { width: min(384px, calc(100vw - 24px)); bottom: 64px; height: min(560px, calc(100dvh - 100px)); }
+  .header { padding: 16px 16px 12px; }
+  .scope, .context { padding-left: 16px; padding-right: 16px; }
+  .conversation { padding: 16px; }
+}

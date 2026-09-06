@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 
+import { isUsableImageSource } from "./image-source"
 import styles from "./products.module.css"
 
 export function ProductImage({ src, name, index = 0 }: {
@@ -10,12 +11,12 @@ export function ProductImage({ src, name, index = 0 }: {
   index?: number
 }) {
   const [failedSource, setFailedSource] = useState<string>()
-  const usable = src && /^https?:\/\//i.test(src) && failedSource !== src
+  const usable = isUsableImageSource(src) && failedSource !== src
 
   return (
     <div className={styles.image}>
       {usable ? (
-        // API-owned image URLs need no global Next.js remote-host configuration.
+        // Catalog-owned local and remote sources need no global Next.js image configuration.
         // eslint-disable-next-line @next/next/no-img-element
         <img
           ref={(image) => {

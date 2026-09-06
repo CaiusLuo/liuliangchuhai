@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="柳州螺蛳粉 演示配图">
+  <title>柳州螺蛳粉</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌或销售规格。</desc>
+  <rect width="1160" height="800" fill="#f0e2cf"/>
+  <rect y="596" width="1160" height="204" fill="#e7d4b9"/>
+  <g fill="none" stroke="#c8ab8b" stroke-width="8" stroke-linecap="round">
+    <path d="M474 250c-28-32-28-62 0-94"/>
+    <path d="M560 224c-32-38-32-74 0-112"/>
+    <path d="M646 250c-28-32-28-62 0-94"/>
+  </g>
+  <path d="M320 384v16c0 130 108 214 240 214s240-84 240-214v-16z" fill="#fcfcf7" stroke="#715542" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M356 402h408c-10 62-40 112-84 144H440c-44-32-74-82-84-144z" fill="#e2c39c"/>
+  <g fill="none" stroke="#fcfcf7" stroke-width="13" stroke-linecap="round">
+    <path d="M418 444c44 28 92 32 144 12"/>
+    <path d="M436 494c60 26 124 22 180-14"/>
+    <path d="M484 532c50 14 100 8 146-22"/>
+  </g>
+  <ellipse cx="560" cy="384" rx="240" ry="46" fill="#f7f7ef" stroke="#715542" stroke-width="10"/>
+  <g fill="#8f9a6d">
+    <path d="M470 352c30-14 58-14 84 2-26 16-54 16-84-2z"/>
+    <path d="M596 344c28-16 56-18 84-4-24 18-52 20-84 4z"/>
+  </g>
+  <g fill="#bf613a">
+    <circle cx="510" cy="372" r="11"/>
+    <circle cx="640" cy="378" r="11"/>
+    <circle cx="576" cy="360" r="9"/>
+  </g>
+  <g fill="#d8b98d" stroke="#715542" stroke-width="5">
+    <circle cx="292" cy="648" r="26"/>
+    <circle cx="352" cy="668" r="22"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5-5 5h-86q-5 0-5-5z" fill="none" stroke="#715542" stroke-width="6"/>
+    <text x="992" y="190" fill="#715542" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">螺</text>
+  </g>
+</svg>

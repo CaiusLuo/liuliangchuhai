@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="北海海鸭蛋 演示配图">
+  <title>北海海鸭蛋</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌、腌制配方或包装规格。</desc>
+  <rect width="1160" height="800" fill="#e6eadc"/>
+  <g fill="none" stroke="#b6c3bd" stroke-width="9" stroke-linecap="round">
+    <path d="M96 236c48-40 96-40 144 0s96 40 144 0"/>
+    <path d="M424 196c48-40 96-40 144 0s96 40 144 0"/>
+    <path d="M180 316c48-40 96-40 144 0s96 40 144 0"/>
+  </g>
+  <rect y="596" width="1160" height="204" fill="#d6dccb"/>
+  <path d="M0 596h1160" stroke="#c2c9b4" stroke-width="8"/>
+  <g stroke="#6d6a52" stroke-width="9">
+    <ellipse cx="420" cy="470" rx="120" ry="150" fill="#5d5a46" transform="rotate(-14 420 470)"/>
+    <ellipse cx="646" cy="524" rx="98" ry="122" fill="#6f6b53" transform="rotate(12 646 524)"/>
+  </g>
+  <path d="M760 596c-64 0-112-46-112-108 0-56 44-96 100-96 60 0 108 46 108 106 0 58-40 98-96 98z" fill="#fcfcf7" stroke="#6d6a52" stroke-width="9"/>
+  <circle cx="758" cy="490" r="52" fill="#dd9b34" stroke="#b87a22" stroke-width="7"/>
+  <g fill="#8f8b72" opacity="0.55">
+    <ellipse cx="382" cy="418" rx="30" ry="40" transform="rotate(-14 382 418)"/>
+    <ellipse cx="614" cy="480" rx="24" ry="32" transform="rotate(12 614 480)"/>
+  </g>
+  <g fill="#fcfcf7">
+    <rect x="236" y="640" width="17" height="17" rx="3" transform="rotate(18 236 640)"/>
+    <rect x="292" y="672" width="14" height="14" rx="3" transform="rotate(-12 292 672)"/>
+    <rect x="196" y="690" width="12" height="12" rx="3" transform="rotate(28 196 690)"/>
+    <rect x="880" y="654" width="16" height="16" rx="3" transform="rotate(-20 880 654)"/>
+    <rect x="932" y="690" width="12" height="12" rx="3" transform="rotate(14 932 690)"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5-5 5h-86q-5 0-5-5z" fill="none" stroke="#5d5a46" stroke-width="6"/>
+    <text x="992" y="190" fill="#5d5a46" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">蛋</text>
+  </g>
+</svg>

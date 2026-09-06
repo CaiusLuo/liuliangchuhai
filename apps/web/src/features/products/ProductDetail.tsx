@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import type { ProductResponse } from "@/api/products"
-import { ProductImage } from "./ProductImage"
+import { ProductGallery } from "./ProductGallery"
 import styles from "./products.module.css"
 
 export function ProductDetail({ product }: { product: ProductResponse }) {
@@ -15,11 +15,7 @@ export function ProductDetail({ product }: { product: ProductResponse }) {
         <Link href="/products">← All products</Link>
       </nav>
       <article className={styles.detail}>
-        <div className={styles.gallery} aria-label={`${product.name} images`}>
-          {product.images.length > 0 ? product.images.map((src, index) => (
-            <ProductImage key={`${index}-${src}`} src={src} name={product.name} index={index} />
-          )) : <ProductImage name={product.name} />}
-        </div>
+        <ProductGallery images={product.images} name={product.name} />
         <div className={styles.detailBody}>
           <header>
             <p className={styles.eyebrow}>{product.category}</p>

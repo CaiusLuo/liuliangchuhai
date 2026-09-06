@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="柳州螺蛳粉 配料示意图">
+  <title>柳州螺蛳粉 · 配料示意图</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌、等级或包装规格。</desc>
+  <rect width="1160" height="800" fill="#fcfcf7"/>
+  <rect x="48" y="48" width="1064" height="704" fill="none" stroke="#b79a78" stroke-width="3"/>
+  <rect x="48" y="48" width="1064" height="96" fill="#f0e2cf"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="88" y="110" font-size="26" fill="#263c30" letter-spacing="4">已知配料 · INGREDIENTS</text>
+    <text x="88" y="700" font-size="20" fill="#636b5e" letter-spacing="2">广西柳州 · 地方食品</text>
+  </g>
+  <g>
+    <path d="M132 358h58" stroke="#b79a78" stroke-width="5" stroke-linecap="round"/>
+    <text x="216" y="372" font-family="Songti SC, Georgia, serif" font-size="40" fill="#263c30" letter-spacing="4">米粉</text>
+    <path d="M132 426h58" stroke="#b79a78" stroke-width="5" stroke-linecap="round"/>
+    <text x="216" y="440" font-family="Songti SC, Georgia, serif" font-size="40" fill="#263c30" letter-spacing="4">酸笋</text>
+    <path d="M132 494h58" stroke="#b79a78" stroke-width="5" stroke-linecap="round"/>
+    <text x="216" y="508" font-family="Songti SC, Georgia, serif" font-size="40" fill="#263c30" letter-spacing="4">腐竹</text>
+    <path d="M132 562h58" stroke="#b79a78" stroke-width="5" stroke-linecap="round"/>
+    <text x="216" y="576" font-family="Songti SC, Georgia, serif" font-size="40" fill="#263c30" letter-spacing="4">花生</text>
+  </g>
+  <g opacity="0.45">
+    <path d="M891 470a77 77 0 0 1 154 0v85q0 8 -8 8h-138q-8 0 -8 -8z" fill="none" stroke="#b79a78" stroke-width="10"/>
+    <text x="968" y="531" fill="#b79a78" font-family="Songti SC, Georgia, serif" font-size="84" text-anchor="middle">粉</text>
+  </g>
+  <text x="88" y="248" font-family="Songti SC, Georgia, serif" font-size="52" fill="#263c30" letter-spacing="5">柳州螺蛳粉</text>
+</svg>

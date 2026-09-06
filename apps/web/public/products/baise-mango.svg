@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="百色芒果 演示配图">
+  <title>百色芒果</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品种、等级或包装规格。</desc>
+  <rect width="1160" height="800" fill="#f7ead0"/>
+  <circle cx="248" cy="216" r="104" fill="#f3dfb4"/>
+  <rect y="618" width="1160" height="182" fill="#eddcbb"/>
+  <g stroke="#8a5c1f" stroke-width="9">
+    <path d="M552 618c-118 0-206-72-206-172 0-92 74-158 176-158 118 0 216 88 216 190 0 84-70 140-186 140z" fill="#e0a531"/>
+    <path d="M792 618c-84 0-146-52-146-124 0-66 52-114 126-114 84 0 154 64 154 138 0 62-50 100-134 100z" fill="#d18b28"/>
+  </g>
+  <path d="M420 356c48-52 116-72 190-58" fill="none" stroke="#f3d79a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M712 400c34-36 82-50 132-40" fill="none" stroke="#eec37c" stroke-width="12" stroke-linecap="round"/>
+  <g stroke="#4f6b39" stroke-width="11" stroke-linecap="round" fill="none">
+    <path d="M534 290c-6-42 4-74 30-98"/>
+    <path d="M786 382c-4-32 4-58 24-76"/>
+  </g>
+  <g fill="#536a43">
+    <path d="M564 192c56-30 108-24 156 18-52 40-104 40-156-18z"/>
+    <path d="M810 306c40-22 78-18 112 12-38 28-76 28-112-12z"/>
+  </g>
+  <g fill="none" stroke="#4f6b39" stroke-width="5" opacity="0.75">
+    <path d="M564 192c50 4 90 16 120 34"/>
+    <path d="M810 306c36 4 64 12 86 24"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5-5 5h-86q-5 0-5-5z" fill="none" stroke="#8a5c1f" stroke-width="6"/>
+    <text x="992" y="190" fill="#8a5c1f" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">芒</text>
+  </g>
+</svg>

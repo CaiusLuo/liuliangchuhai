@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="桂林罗汉果 演示配图">
+  <title>桂林罗汉果</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌或包装。</desc>
+  <rect width="1160" height="800" fill="#e8e4d9"/>
+  <g fill="#d7d3c3">
+    <path d="M0 470l150-190 130 190z"/>
+    <path d="M196 470l176-224 172 224z"/>
+    <path d="M470 470l124-158 116 158z"/>
+  </g>
+  <rect y="470" width="1160" height="330" fill="#dcd7c8"/>
+  <rect y="470" width="1160" height="8" fill="#c7c1ae"/>
+  <g stroke="#7b6242" stroke-width="9">
+    <ellipse cx="404" cy="588" rx="132" ry="124" fill="#a8814f"/>
+    <ellipse cx="646" cy="620" rx="104" ry="98" fill="#93703f"/>
+    <ellipse cx="810" cy="574" rx="78" ry="74" fill="#b08c58"/>
+  </g>
+  <g fill="none" stroke="#7b6242" stroke-width="6" opacity="0.7">
+    <path d="M330 480c26 66 26 148 0 216"/>
+    <path d="M404 464v248"/>
+    <path d="M478 480c-26 66-26 148 0 216"/>
+    <path d="M646 522v196"/>
+    <path d="M588 536c22 54 22 116 0 168"/>
+    <path d="M704 536c-22 54-22 116 0 168"/>
+  </g>
+  <g stroke="#5d4a2e" stroke-width="10" stroke-linecap="round">
+    <path d="M404 464v-34"/>
+    <path d="M646 522v-30"/>
+    <path d="M810 500v-28"/>
+  </g>
+  <path d="M186 706c62-104 158-152 288-144" fill="none" stroke="#536a43" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#536a43">
+    <path d="M186 706c-6-52 14-90 60-114 10 56-10 94-60 114z"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5-5 5h-86q-5 0-5-5z" fill="none" stroke="#5d4a2e" stroke-width="6"/>
+    <text x="992" y="190" fill="#5d4a2e" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">果</text>
+  </g>
+</svg>

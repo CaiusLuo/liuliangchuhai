@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="梧州六堡茶 配料示意图">
+  <title>梧州六堡茶 · 配料示意图</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌、等级或包装规格。</desc>
+  <rect width="1160" height="800" fill="#fcfcf7"/>
+  <rect x="48" y="48" width="1064" height="704" fill="none" stroke="#a7b094" stroke-width="3"/>
+  <rect x="48" y="48" width="1064" height="96" fill="#e4e8d8"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="88" y="110" font-size="26" fill="#263c30" letter-spacing="4">已知配料 · INGREDIENTS</text>
+    <text x="88" y="700" font-size="20" fill="#636b5e" letter-spacing="2">广西梧州 · 茶叶</text>
+  </g>
+  <g>
+    <path d="M132 358h58" stroke="#a7b094" stroke-width="5" stroke-linecap="round"/>
+    <text x="216" y="372" font-family="Songti SC, Georgia, serif" font-size="40" fill="#263c30" letter-spacing="4">茶叶</text>
+  </g>
+  <g opacity="0.45">
+    <path d="M891 470a77 77 0 0 1 154 0v85q0 8 -8 8h-138q-8 0 -8 -8z" fill="none" stroke="#a7b094" stroke-width="10"/>
+    <text x="968" y="531" fill="#a7b094" font-family="Songti SC, Georgia, serif" font-size="84" text-anchor="middle">茶</text>
+  </g>
+  <text x="88" y="248" font-family="Songti SC, Georgia, serif" font-size="52" fill="#263c30" letter-spacing="5">梧州六堡茶</text>
+</svg>

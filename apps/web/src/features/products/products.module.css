@@ -28,6 +28,12 @@
 .gallery { display: grid; gap: 16px; }
 .gallery .image { border: 1px solid var(--line); border-radius: var(--card-radius); }
 .gallery .image img { object-fit: contain; }
+.thumbnails { display: flex; flex-wrap: wrap; gap: 12px; }
+.thumbnail { display: grid; place-items: center; width: 72px; aspect-ratio: 1.45; padding: 0; border: 1px solid var(--line); border-radius: var(--control-radius); background: #e4e8d8; cursor: pointer; overflow: hidden; }
+.thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+.thumbnail:hover { border-color: var(--accent); }
+.thumbnail[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.thumbnailMark { color: #89917b; font-size: 20px; }
 .detailBody { min-width: 0; }
 .fullDescription { margin: 20px 0; color: var(--muted); white-space: pre-line; }
 .price { margin-bottom: 20px; font-size: 18px; font-weight: 600; }
@@ -50,5 +56,6 @@
 @media (max-width: 760px) {
   .grid, .detail { grid-template-columns: minmax(0, 1fr); }
   .image { aspect-ratio: 1.6; }
+  .thumbnail { width: 64px; }
   .breadcrumb { margin-bottom: 24px; }
 }

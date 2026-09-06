@@ -3,6 +3,7 @@
 import { useState } from "react"
 
 import styles from "@/app/page.module.css"
+import { isUsableImageSource } from "@/features/products/image-source"
 
 export function CatalogImage({ src, name, priority = false }: {
   src?: string
@@ -10,12 +11,12 @@ export function CatalogImage({ src, name, priority = false }: {
   priority?: boolean
 }) {
   const [failedSource, setFailedSource] = useState<string>()
-  const usable = src && /^https?:\/\//i.test(src) && failedSource !== src
+  const usable = isUsableImageSource(src) && failedSource !== src
 
   return (
     <div className={styles.catalogImage}>
       {usable ? (
-        // Catalog-owned URLs follow the existing adapter/image display pattern.
+        // Catalog-owned local and remote sources follow the existing image display pattern.
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="横州茉莉花茶 演示配图">
+  <title>横州茉莉花茶</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌、批次或等级。</desc>
+  <rect width="1160" height="800" fill="#e9eddf"/>
+  <rect y="620" width="1160" height="180" fill="#dbe1cd"/>
+  <path d="M352 434h316l-30 152c-6 30-32 52-62 52H444c-30 0-56-22-62-52z" fill="#fcfcf7" stroke="#41563c" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M378 476h264l-20 100c-4 20-22 34-42 34H440c-20 0-38-14-42-34z" fill="#dfd08a"/>
+  <ellipse cx="510" cy="434" rx="158" ry="34" fill="#f7f7ef" stroke="#41563c" stroke-width="10"/>
+  <path d="M668 476h74c34 0 60 26 60 58s-26 58-60 58h-24" fill="none" stroke="#41563c" stroke-width="10" stroke-linecap="round"/>
+  <g fill="#fcfcf7" stroke="#b8bfaf" stroke-width="6">
+    <g transform="translate(300 250)">
+      <ellipse cx="0" cy="-52" rx="30" ry="52"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="19" fill="#e0c96a" stroke="none"/>
+    </g>
+    <g transform="translate(690 300) scale(0.78)">
+      <ellipse cx="0" cy="-52" rx="30" ry="52"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-52" rx="30" ry="52" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="19" fill="#e0c96a" stroke="none"/>
+    </g>
+  </g>
+  <g fill="#536a43">
+    <path d="M198 596c-8-56 12-98 60-124 12 60-10 102-60 124z"/>
+    <path d="M816 620c-8-48 10-84 52-106 10 52-8 88-52 106z"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5-5 5h-86q-5 0-5-5z" fill="none" stroke="#41563c" stroke-width="6"/>
+    <text x="992" y="190" fill="#41563c" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">茉</text>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="梧州六堡茶 产地示意图">
+  <title>梧州六堡茶 · 产地示意图</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌、等级或包装规格。</desc>
+  <rect width="1160" height="800" fill="#e4e8d8"/>
+  <rect y="596" width="1160" height="204" fill="#d5dcc4"/>
+  <g fill="none" stroke="#a7b094" stroke-width="7" stroke-linecap="round">
+    <path d="M132 596c74-96 158-140 252-132"/>
+    <path d="M1028 596c-74-96-158-140-252-132"/>
+    <path d="M196 664h768M256 712h648"/>
+  </g>
+  <g fill="none" stroke="#41563c" stroke-width="9" stroke-linecap="round">
+    <path d="M580 208c66 40 66 130 0 178-66-48-66-138 0-178z"/>
+    <path d="M580 232v130"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5 -5 5h-86q-5 0 -5 -5z" fill="none" stroke="#41563c" stroke-width="6"/>
+    <text x="992" y="190" fill="#41563c" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">茶</text>
+  </g>
+  <g font-family="Songti SC, Georgia, serif" fill="#263c30">
+    <text x="132" y="524" font-size="60" letter-spacing="6">梧州六堡茶</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#636b5e">
+    <text x="134" y="566" font-size="24" letter-spacing="3">广西梧州 · 茶叶</text>
+    <text x="134" y="756" font-size="20" letter-spacing="2">DEMO IMAGE · 演示配图</text>
+  </g>
+</svg>

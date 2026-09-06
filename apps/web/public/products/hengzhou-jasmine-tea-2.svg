@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 800" width="1160" height="800" role="img" aria-label="横州茉莉花茶 产地示意图">
+  <title>横州茉莉花茶 · 产地示意图</title>
+  <desc>项目自制的演示用示意图形，不代表任何具体品牌、等级或包装规格。</desc>
+  <rect width="1160" height="800" fill="#e9eddf"/>
+  <rect y="596" width="1160" height="204" fill="#dbe1cb"/>
+  <g fill="none" stroke="#a9b396" stroke-width="7" stroke-linecap="round">
+    <path d="M132 596c74-96 158-140 252-132"/>
+    <path d="M1028 596c-74-96-158-140-252-132"/>
+    <path d="M196 664h768M256 712h648"/>
+  </g>
+  <g fill="none" stroke="#41563c" stroke-width="8">
+    <ellipse cx="580" cy="248" rx="27" ry="48" transform="rotate(0 580 300)"/><ellipse cx="580" cy="248" rx="27" ry="48" transform="rotate(60 580 300)"/><ellipse cx="580" cy="248" rx="27" ry="48" transform="rotate(120 580 300)"/><ellipse cx="580" cy="248" rx="27" ry="48" transform="rotate(180 580 300)"/><ellipse cx="580" cy="248" rx="27" ry="48" transform="rotate(240 580 300)"/><ellipse cx="580" cy="248" rx="27" ry="48" transform="rotate(300 580 300)"/>
+    <circle cx="580" cy="300" r="20" fill="#536a43" stroke="none"/>
+  </g>
+  <g opacity="0.62">
+    <path d="M944 152a48 48 0 0 1 96 0v53q0 5 -5 5h-86q-5 0 -5 -5z" fill="none" stroke="#41563c" stroke-width="6"/>
+    <text x="992" y="190" fill="#41563c" font-family="Songti SC, Georgia, serif" font-size="52" text-anchor="middle">莉</text>
+  </g>
+  <g font-family="Songti SC, Georgia, serif" fill="#263c30">
+    <text x="132" y="524" font-size="60" letter-spacing="6">横州茉莉花茶</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#636b5e">
+    <text x="134" y="566" font-size="24" letter-spacing="3">广西横州 · 花茶</text>
+    <text x="134" y="756" font-size="20" letter-spacing="2">DEMO IMAGE · 演示配图</text>
+  </g>
+</svg>
